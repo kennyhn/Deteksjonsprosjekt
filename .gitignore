@@ -360,3 +360,22 @@ MigrationBackup/
 *.run.xml
 *.synctex.gz
 *.toc
+
+# Windows default autosave extension
+*.asv
+
+# Compiled MEX binaries (all platforms)
+*.mex*
+
+# Simulink code generation folders
+slprj/
+sccprj/
+
+# Matlab code generation folders
+codegen/
+
+# Simulink autosave extension
+*.autosave
+
+# Simulink cache files
+*.slxc
