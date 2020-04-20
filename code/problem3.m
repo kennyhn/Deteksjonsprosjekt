@@ -20,7 +20,7 @@ chi_sq_h0   = zeros(N, 1);
 chi_sq_h1   = zeros(N, 1);
 
 for i = 1:N
-    chi_sq_h0(i) = 2*abs(x_h0(i))^2/sigma_s_sq_hat;
+    chi_sq_h0(i) = 2*abs(x_h0(i))^2/sigma_w_sq_hat;
     chi_sq_h1(i) = 2*abs(x_h1(i))^2/(sigma_s_sq_hat+sigma_w_sq_hat);
 end
 
@@ -28,7 +28,7 @@ end
 
 %% Generate an arbitrary chi-square random variable with two DoF
 
-x           = 0:0.1:10;
+x           = 0:0.1:15;
 doF         = 2;
 chi_sq      = pdf('Chisquare', x, doF)'; 
 
