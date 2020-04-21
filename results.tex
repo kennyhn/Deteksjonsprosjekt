@@ -1,4 +1,42 @@
 \section{Implementation and results}\label{sec:results}
+\subsection{Task 1: Model development}
+\todo{Legg til figurer og kommentarer for første oppgaven}
+\subsection{Task 2: One-sample-detector}
+In this task only one sample is used meaning that the detection problem is in this case:
+\begin{align}
+    H_0 &: x(0) = w(0)\nonumber\\
+    H_1 &: x(0) = s(0)+w(0)\nonumber
+\end{align}
+It is given from the problem that $w\thicksim\mathbb{C}\mathcal{N}(0, \sigma_w^2)$ and $s\thicksim\mathbb{C}\mathcal{N}(\mu_s, \sigma_s^2)$ which means that under $H_0$, $x$ is from same distribution as $w$ and thus a complex gaussian with same mean and variance as $w$. Under $H_1$, which is a sum of two complex gaussian distribution, $x$ also is from a complex gaussian distribution, however the mean and variance needs to be calculated.
+The mean of $x(0)$ under $H_1$ is\todo{Usikker på om det er vits med disse utregningene}
+\begin{align}
+    \mathbb{E}\{x(0)\} & = \mathbb{E}\{s(0)+w(0)\}\nonumber\\
+    & = \mathbb{E}\{s(0)\} + \mathbb{E}\{w(0)\}\nonumber\\
+    & = \mu_s + 0 = \mu_s\nonumber
+\end{align} 
+The variance of $x(0)$ under $H_1$ is
+\begin{align}
+    \mathrm{Var}\{x(0)\} & = \mathrm{Var}\{s(0)+w(0)\}\nonumber\\
+    & = \mathrm{Var}\{s(0)\} + \mathrm{Var}\{w(0)\}\nonumber\\
+    & = \sigma_s^2+\sigma_w^2\nonumber
+\end{align}
+Meaning that
+\begin{align}
+    p(x;H_0) & = p_0(x) = \frac{1}{\sigma_w^2\pi}e^{-\frac{|x|^2}{\sigma_w^2}}\\
+    p(x;H_1) & = p_1(x) = \frac{1}{(\sigma_w^2+\sigma_s^2)\pi}e^{-\frac{|x-\mu_s|^2}{\sigma_s^2+\sigma_w^2}}
+\end{align}
+Setting up the LRT:
+\begin{align}
+    L(x) & = \frac{p_1(x(0))}{p_0(x(0))} = \frac{\frac{1}{(\sigma_w^2+\sigma_s^2)\pi}e^{-\frac{|x(0)-\mu_s|^2}{\sigma_s^2+\sigma_w^2}}}{\frac{1}{\sigma_w^2\pi}e^{-\frac{|x(0)|^2}{\sigma_w^2}}}\nonumber\\
+    & = \frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}e^(-\frac{1}{\sigma_w^2+\sigma_s^2}|x(0)-\mu_s|^2+\frac{1}{\sigma_w^2}|x(0)|^2)\nonumber
+\end{align}
+Since it was shown in task 1 that $\mu_s \simeq 0$ this can be used to simplify the caluclations. The decision rule is to choose $H_1$ when $L(x) \geq \lambda$, since $L(x(0))$ is a monotonically increasing function then the inequality holds for $\ln L(x(0)) \geq \ln\lambda$.
+\begin{align}
+    \ln L(x(0)) = \ln (\sigma_w^2)-\ln (\sigma_w^2+\sigma_s^2)-\frac{1}{\sigma_w^2+\sigma_s^2}|x(0)|^2+\frac{1}{\sigma_w^2}|x(0)|^2 \geq \ln\lambda\nonumber\\
+    (\frac{1}{\sigma_w^2}+\frac{1}{\sigma_s^2+\sigma_w^2})|x(0)|^2 \geq \ln\lambda-\ln (\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2})\nonumber\\
+    |x(0)|^2 = x_R(0)^2+x_I(0)^2 \geq \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}(\ln\lambda-\ln (\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2})) = \lambda'
+\end{align}
+
 \begin{enumerate}[i]
     \item What is this chapter about
     \item Matlab implementation
