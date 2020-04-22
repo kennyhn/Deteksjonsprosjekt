@@ -28,15 +28,37 @@ Meaning that
 Setting up the LRT:
 \begin{align}
     L(x) & = \frac{p_1(x(0))}{p_0(x(0))} = \frac{\frac{1}{(\sigma_w^2+\sigma_s^2)\pi}e^{-\frac{|x(0)-\mu_s|^2}{\sigma_s^2+\sigma_w^2}}}{\frac{1}{\sigma_w^2\pi}e^{-\frac{|x(0)|^2}{\sigma_w^2}}}\nonumber\\
-    & = \frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}e^(-\frac{1}{\sigma_w^2+\sigma_s^2}|x(0)-\mu_s|^2+\frac{1}{\sigma_w^2}|x(0)|^2)\nonumber
+    & = \frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}e^{-\frac{1}{\sigma_w^2+\sigma_s^2}|x(0)-\mu_s|^2+\frac{1}{\sigma_w^2}|x(0)|^2}\nonumber
 \end{align}
 Since it was shown in task 1 that $\mu_s \simeq 0$ this can be used to simplify the caluclations. The decision rule is to choose $H_1$ when $L(x) \geq \lambda$, since $L(x(0))$ is a monotonically increasing function then the inequality holds for $\ln L(x(0)) \geq \ln\lambda$.
 \begin{align}
     \ln L(x(0)) = \ln (\sigma_w^2)-\ln (\sigma_w^2+\sigma_s^2)-\frac{1}{\sigma_w^2+\sigma_s^2}|x(0)|^2+\frac{1}{\sigma_w^2}|x(0)|^2 \geq \ln\lambda\nonumber\\
     (\frac{1}{\sigma_w^2}+\frac{1}{\sigma_s^2+\sigma_w^2})|x(0)|^2 \geq \ln\lambda-\ln (\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2})\nonumber\\
-    |x(0)|^2 = x_R(0)^2+x_I(0)^2 \geq \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}(\ln\lambda-\ln (\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2})) = \lambda'
+    |x(0)|^2 = x_R(0)^2+x_I(0)^2 \geq \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}(\ln\lambda-\ln (\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2})) = \lambda'\nonumber
 \end{align}
 
+\subsection{Task 3: Performance of the detector above}
+The probability for false alarm is the probability that $|x(0)|>\lambda'$, assumed that it is actually the null hypothesis that is correct. 
+\begin{align}
+    P_{FA}(\lambda') & = \text{Prob}\{|x(0)|>\lambda'\vert H_0\}\nonumber\\
+    & = \int_{\lambda'}^{\infty}\frac{1}{\pi\sigma_w^2}e^{-\frac{1}{\sigma_w^2}|x(0)|^2}d|x(0)|\nonumber
+\end{align}
+The probability for detection or the power of the detector is:
+\begin{align}
+    P_D(\lambda') & = \text{Prob}\{|x(0)|>\lambda'\vert H_1\}\nonumber\\
+    & = \int_{\lambda'}^{\infty}\frac{1}{\pi(\sigma_w^2+\sigma_s^2)}e^{-\frac{1}{(\sigma_w^2+\sigma_s^2)}|x(0)|^2}d|x(0)|\nonumber
+\end{align}
+\subsection{Task 4: Generalized for multiple samples}
+We take the one-sample-detector a step further and generalize it to use it for multiple samples. That is that we use the likelihood function to calculate the LRT so that we get
+\begin{align}
+    \ln L(x) & = \ln\prod_{n=0}^{K-1}\frac{1}{(\sigma_w^2+\sigma_s^2)\pi}e^{-\frac{|x(n)|^2}{\sigma_s^2+\sigma_w^2}}-\ln\prod_{n=0}^{K-1}\frac{1}{\sigma_w^2\pi}e^{-\frac{|x(n)|^2}{\sigma_w^2}}\nonumber\\
+    & = \sum_{n=0}^{K-1}\left(\ln\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2} + \frac{|x(n)|^2}{\sigma_w^2}-\frac{|x(n)|^2}{\sigma_w^2+\sigma_s^2} \right)\nonumber\\
+    & = \sum_{n=0}^{K-1}\left(\ln\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2} + \frac{\sigma_s^2}{\sigma_w^2(\sigma_w^2+\sigma_s^2)}|x(n)|^2\right)\geq\ln\lambda\nonumber
+\end{align}
+So the decision rule ends up being that choose $H_1$ when
+\begin{equation}
+    \sum_{n=0}^{K-1}|x(n)|^2 \geq \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}\left(\ln\lambda-K\ln\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}\right) = \lambda'
+\end{equation}
 \begin{enumerate}[i]
     \item What is this chapter about
     \item Matlab implementation
