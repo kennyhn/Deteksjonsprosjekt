@@ -12,11 +12,14 @@ To construct the sequence $s(n)$, that is transmitted over the wireless channel,
 	s(n) = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}S(k)e^{\frac{j2\pi nk}{N}}, n = 0,1,\dots,N-1
 \end{equation}
 which we notice is a complex-valued quantity.
+
 \subsection{Task 1: Model building}
 Here the data $x[n]$ is generated, which can be used in our analysis to obtain a suitable detector. To generate $x[n]$ we need do to verify that the complex-valued time-domain OFDM signal sequence $s(n) = s_R(n)+js_I(n)$ is independent and identically distributed, in addition to verify that it is accurately modelled with a complex gaussian distribution.\\
 Here the datasets T1 are used as the information symbol sent over. The two datasets contains samples that are taken from a standard normal Gaussian distribution and binary phase shift keying respectively.
+
 \subsection{Task 2: One-sample detector}
 In this task only a single sample is used to generate the NP-detector. That is there needs to be done calculations to retrieve the decision rule that decides for when to choose null hypothesis over the alternative hypothesis and vice versa.
+
 \subsection{Task 3: Performance of the one-sample detector}
 Here the datasets T3 are given and are to be used to verify that
 \begin{align}
@@ -25,6 +28,20 @@ Here the datasets T3 are given and are to be used to verify that
 \end{align}
 are $\chi^2$-distributed with 2 degrees of freedom. Using this we can approximate that $\frac{2|x(0)|^2}{\sigma^2}$ has the point-distribution function $f(x) = \frac{1}{2}e^{-\frac{x}{2}}$ for $x>0$. Which is more manageable than the pdf for the complex gaussian so that it can be used to easily find the probability of detection and false alarm.
 
+\subsection{Task 4: NP detector with data set of $K$ samples}
+Here the one-sample detector derived in the previous tasks are expanded so it can be used when there are $K>1$ samples. Then the threshold $\lambda'$ is derived so that in this case probability of detection is maximized and probability of false alarm is less than a given limit $\alpha$.
+
+ubsection{Task 5: Performance of the general NP detector}
+First compute the distribution of the test statistic obtained in the previous task under hypothesis $H_0$ and $H_1$. Plot the receiving operating characteristics.
+
+\subsection{Task 6: Approximate performance of the general NP detector}
+Central limit theorem to approximate the characteristic test statistic as a gaussian random variable and compute the PDF of the test statistic. Plot $P_D$ and $P_{FA}$ as a function of the threshold.
+
+\subsection{Task 7: Complexity of the detector}
+Use approximation in task 6 and find an expression to compute the number of samples required to attain a given $P_{FA}$ and $P_D$.
+
+\subsection{Task 8: Numerical experiments in PU detection}
+Given a dataset of numerical experiment data, apply the NP detector to decide wether a PU is present or not. Discuss the results
 \begin{enumerate}[i]
 	\item Give a short description of all tasks and why are we doing these tasks
 	\item Describe the task
