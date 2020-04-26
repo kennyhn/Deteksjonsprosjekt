@@ -42,7 +42,7 @@ plot(x, chi_sq, '--', 'Linewidth', 1);
 hold on
 grid on;
 hold on;
-legend('$\chi^2$', 'Interpreter', 'latex');
+legend('Histogram of $H_0$','$pdf of \chi^2$', 'Interpreter', 'latex');
 hold off
 
 figure(2);
@@ -54,5 +54,5 @@ plot(x, chi_sq, '--', 'Linewidth', 1);
 hold on
 grid on;
 hold on;
-legend('$\chi^2$', 'Interpreter', 'latex');
+legend('Histogram of $H_1$', 'pdf of $\chi^2$', 'Interpreter', 'latex');
 hold off

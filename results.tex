@@ -1,6 +1,38 @@
 \section{Implementation and results}\label{sec:results}
 \subsection{Task 1: Model development}
-\todo{Legg til figurer og kommentarer for første oppgaven}
+\begin{figure}[ht]
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        % include first image
+        \includegraphics[width=.8\linewidth]{figures/re_gauss.eps}  
+        \caption{The histogram of Re(S(k))$~$Gaussian}
+        \label{fig:re_gauss}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        % include second image
+        \includegraphics[width=.8\linewidth]{figures/im_gauss.eps}  
+        \caption{The histogram of Im(S(k))$~$Gaussian}
+        \label{fig:im_gauss}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        % include third image
+        \includegraphics[width=.8\linewidth]{figures/re_bpsk.eps}
+        \caption{The histogram of Re(S(k))$~$BPSK}
+        \label{fig:re_bpsk}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        % include fourth image
+        \includegraphics[width=.8\linewidth]{figures/im_bpsk.eps}
+        \caption{The histogram of Im(S(k))$~$BPSK}
+        \label{fig:im_bpsk}
+    \end{subfigure}
+    \caption{The histograms compared to pdf of gaussian}
+    \label{fig:gauss}
+\end{figure}
+
 \subsection{Task 2: One-sample-detector}
 In this task only one sample is used meaning that the detection problem is in this case:
 \begin{align}
@@ -36,26 +68,51 @@ Since it was shown in task 1 that $\mu_s \simeq 0$ this can be used to simplify 
     (\frac{1}{\sigma_w^2}+\frac{1}{\sigma_s^2+\sigma_w^2})|x(0)|^2 \geq \ln\lambda-\ln (\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2})\nonumber\\
     |x(0)|^2 = x_R(0)^2+x_I(0)^2 \geq \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}(\ln\lambda-\ln (\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2})) = \lambda'\nonumber
 \end{align}
-\todo{Vi kan bruke at når vi integrerer fra $\lambda'>0$ så er punktsannsynligheten tilsvarende en chi-kvadrat fordeling!!}
-\subsection{Task 3: Performance of the detector above}
-The probability for false alarm is the probability that $|x(0)|>\lambda'$, assumed that it is actually the null hypothesis that is correct. 
+This also means that the decision rule is to choose $H_1$ when $|x(0)|^2\geq\lambda'$ and choose $H_0$ when $|x(0)|^2<\lambda'$ where
+\begin{equation}
+    \lambda' = \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}(\ln\lambda-\ln (\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}))
+\end{equation}\label{eq:lambda_prime}
+\subsection{Task 3: Performance of the one-sample detector}
+\begin{figure}[ht]
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        % include first image
+        \includegraphics[width=.8\linewidth]{figures/chi_square_h0.eps}  
+        \caption{The histogram of \eqref{eq:chi_sq_h0}}
+        \label{fig:chi_sq_h0}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        % include second image
+        \includegraphics[width=.8\linewidth]{figures/chi_square_h1.eps}  
+        \caption{The histogram of \eqref{eq:chi_sq_h1}}
+        \label{fig:chi_sq_h1}
+    \end{subfigure}
+\end{figure}
+The probability for false alarm is the probability that $|x(0)|^2>\lambda'$, assumed that it is actually the null hypothesis that is correct. Instead of using the complex gaussian pdf we have shown that $2\frac{|x(0)|^2}{\sigma^2}$ under $H_0$ and $H_1$ can be approximated to be $\chi^2$ distributed meaning that
 \begin{align}
-    P_{FA}(\lambda') & = \text{Prob}\{|x(0)|>\lambda'\vert H_0\}\nonumber\\
-    & = \int_{\lambda'}^{\infty}\frac{1}{\pi\sigma_w^2}e^{-\frac{1}{\sigma_w^2}|x(0)|^2}d|x(0)|\nonumber
+    P_{FA} & = \text{Prob}\{|x(0)|\geq\lambda'\vert H_0\}\nonumber\\
+    & = \frac{\sigma_w^2}{2}\int_{\lambda'}^{\infty}\frac{e^{-\frac{x}{2}}}{2}dx\nonumber\\
+    & = -\frac{\sigma_w^2}{2}e^{-\frac{x}{2}}\bigg\rvert_{\lambda'}^{\infty}\nonumber\\
+    & = \frac{\sigma_w^2}{2}e^{-\frac{\lambda'}{2}}\nonumber
 \end{align}
-The probability for detection or the power of the detector is:
+Which only holds when $\lambda'>0$.\\
+Furthermore the probability for detection is
 \begin{align}
-    P_D(\lambda') & = \text{Prob}\{|x(0)|>\lambda'\vert H_1\}\nonumber\\
-    & = \int_{\lambda'}^{\infty}\frac{1}{\pi(\sigma_w^2+\sigma_s^2)}e^{-\frac{1}{(\sigma_w^2+\sigma_s^2)}|x(0)|^2}d|x(0)|\nonumber
+    P_D & = \text{Prob}\{|x(0)|\geq\lambda'\vert H_1\}\nonumber\\
+    & = \frac{\sigma_w^2+\sigma_s^2}{2}\int_{\lambda'}^{\infty}\frac{e^{-\frac{x}{2}}}{2}dx\nonumber\\
+    & = -\frac{\sigma_w^2+\sigma_s^2}{2}e^{-\frac{x}{2}}\bigg\rvert_{\lambda'}^{\infty}\nonumber\\
+    & = \frac{\sigma_w^2+\sigma_s^2}{2}e^{-\frac{\lambda'}{2}}\nonumber
 \end{align}
+Which also only holds for $\lambda'>0$\\
 \subsection{Task 4: Generalized for multiple samples}
-We take the one-sample-detector a step further and generalize it to use it for multiple samples. That is that we use the likelihood function to calculate the LRT so that we get
+We take the one-sample-detector a step further and generalize it to use it for multiple samples. That is that the likelihood function is used to calculate the LRT so that we get
 \begin{align}
     \ln L(x) & = \ln\prod_{n=0}^{K-1}\frac{1}{(\sigma_w^2+\sigma_s^2)\pi}e^{-\frac{|x(n)|^2}{\sigma_s^2+\sigma_w^2}}-\ln\prod_{n=0}^{K-1}\frac{1}{\sigma_w^2\pi}e^{-\frac{|x(n)|^2}{\sigma_w^2}}\nonumber\\
     & = \sum_{n=0}^{K-1}\left(\ln\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2} + \frac{|x(n)|^2}{\sigma_w^2}-\frac{|x(n)|^2}{\sigma_w^2+\sigma_s^2} \right)\nonumber\\
     & = \sum_{n=0}^{K-1}\left(\ln\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2} + \frac{\sigma_s^2}{\sigma_w^2(\sigma_w^2+\sigma_s^2)}|x(n)|^2\right)\geq\ln\lambda\nonumber
 \end{align}
-So the decision rule ends up being that choose $H_1$ when
+So the decision rule ends up being to choose $H_1$ when
 \begin{equation}
     \sum_{n=0}^{K-1}|x(n)|^2 \geq \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}\left(\ln\lambda-K\ln\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}\right) = \lambda'
 \end{equation}

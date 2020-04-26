@@ -15,15 +15,15 @@ which we notice is a complex-valued quantity.
 \subsection{Task 1: Model building}
 Here the data $x[n]$ is generated, which can be used in our analysis to obtain a suitable detector. To generate $x[n]$ we need do to verify that the complex-valued time-domain OFDM signal sequence $s(n) = s_R(n)+js_I(n)$ is independent and identically distributed, in addition to verify that it is accurately modelled with a complex gaussian distribution.\\
 Here the datasets T1 are used as the information symbol sent over. The two datasets contains samples that are taken from a standard normal Gaussian distribution and binary phase shift keying respectively.
-\subsection{Task 2:One-sample detector}
+\subsection{Task 2: One-sample detector}
 In this task only a single sample is used to generate the NP-detector. That is there needs to be done calculations to retrieve the decision rule that decides for when to choose null hypothesis over the alternative hypothesis and vice versa.
 \subsection{Task 3: Performance of the one-sample detector}
 Here the datasets T3 are given and are to be used to verify that
 \begin{align}
-	H_0 &: \frac{2x_R^2(0)}{\sigma_w^2}+\frac{2x_I^2(0)}{\sigma_w^2}\nonumber\\
-	H_1 &: \frac{2x_R^2(0)}{\sigma_w^2+\sigma_s^2}+\frac{2x_I^2(0)}{\sigma_w^2+\sigma_s^2}\nonumber
+	H_0 &: \frac{2x_R^2(0)}{\sigma_w^2}+\frac{2x_I^2(0)}{\sigma_w^2}=\frac{2|x(0)|^2}{\sigma_w^2}\label{eq:chi_sq_h0}\\
+	H_1 &: \frac{2x_R^2(0)}{\sigma_w^2+\sigma_s^2}+\frac{2x_I^2(0)}{\sigma_w^2+\sigma_s^2}=\frac{2|x(0)|^2}{\sigma_w^2+\sigma_s^2}\label{eq:chi_sq_h1}
 \end{align}
-are $\chi^2$-distributed with 2 degrees of freedom. \todo{Hva slags relevans har det at denne er kji-kvadratfordelt?}\todo{Har dette noe å si for teststyrken? jf. https://online.stat.psu.edu/stat800/node/66/} Then the probability of detection and false alarm are found with the one-sample-detector found in previous task.
+are $\chi^2$-distributed with 2 degrees of freedom. Using this we can approximate that $\frac{2|x(0)|^2}{\sigma^2}$ has the point-distribution function $f(x) = \frac{1}{2}e^{-\frac{x}{2}}$ for $x>0$. Which is more manageable than the pdf for the complex gaussian so that it can be used to easily find the probability of detection and false alarm.
 
 \begin{enumerate}[i]
 	\item Give a short description of all tasks and why are we doing these tasks

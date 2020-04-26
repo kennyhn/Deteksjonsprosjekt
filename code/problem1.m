@@ -63,15 +63,12 @@ disp(['The expected value of product of real and imaginary part' ...
     ' with bpsk samples: ' num2str(product_s_expected_bpsk)]);
 
 %% Gaussian Create a generic complex point distribution
-sigma_s_sq      = 900; %10^(-5);
+sigma_s_sq      = 980; %10^(-5);
 
 px_r            = makedist('Normal', 'mu', 0, 'sigma', sqrt(sigma_s_sq/2));
 px_i            = makedist('Normal', 'mu', 0, 'sigma', sqrt(sigma_s_sq/2));
 
 x = (-80:0.1:80)';%(-6*10^(-3):10^(-4):6*10^(-3))';
-
-%figure(5);
-%px              = px_r.pdf(x).*px_i.pdf(x);
 
 
 %% Plot histograms of the sampled data Gaussian
@@ -82,8 +79,12 @@ histogram(s_gauss_real, 'Normalization', 'pdf');
 hold on
 plot(x, px_r.pdf(x), '--', 'Linewidth', 1)
 hold on
+xlabel('x');
+hold on
+ylabel('p(x)');
+hold on
 grid on;
-legend('histogram', 'true pdf');
+legend('histogram', 'true pdf, $\sigma^2 = 980$', 'Interpreter', 'latex');
 hold off;
 
 figure(2);
@@ -93,8 +94,12 @@ histogram(s_gauss_imag, 'Normalization', 'pdf');
 hold on
 plot(x, px_i.pdf(x), '--', 'Linewidth', 1)
 hold on
+xlabel('x');
+hold on
+ylabel('p(x)');
+hold on
 grid on;
-legend('histogram', 'true pdf');
+legend('histogram', 'true pdf, $\sigma^2 = 980$', 'Interpreter', 'latex');
 hold off;
 
 %% BPSK Create a generic complex point distribution
@@ -114,8 +119,12 @@ histogram(s_bpsk_real, 'Normalization', 'pdf');
 hold on
 plot(x, px_r.pdf(x), '--', 'Linewidth', 1)
 hold on
+xlabel('x');
+hold on
+ylabel('p(x)');
+hold on
 grid on;
-legend('histogram', 'true pdf');
+legend('histogram', 'true pdf, $\sigma^2 = 800$', 'Interpreter', 'latex');
 hold off;
 
 figure(4);
@@ -125,8 +134,12 @@ histogram(s_bpsk_real, 'Normalization', 'pdf');
 hold on
 plot(x, px_i.pdf(x), '--', 'Linewidth', 1)
 hold on
+xlabel('x');
+hold on
+ylabel('p(x)');
+hold on
 grid on;
-legend('histogram', 'true pdf');
+legend('histogram', 'true pdf, $\sigma^2 = 800$', 'Interpreter', 'latex');
 hold off;
 
 
