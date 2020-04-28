@@ -1,18 +1,18 @@
-close all; clc
+close all; clc; clear all
 
 
 %% Load data
 x_h0        = load('Dataset/T3_data_x_H0.mat').T3_data_x_H0; % x=w
 x_h1        = load('Dataset/T3_data_x_H1.mat').T3_data_x_H1; % x=w+s
 
-sigma_w_sq  = load('Dataset/T3_data_sigma_w.mat').w;
-sigma_s_sq  = load('Dataset/T3_data_sigma_s.mat').s_t;
+sigma_w  = load('Dataset/T3_data_sigma_w.mat').w;
+sigma_s  = load('Dataset/T3_data_sigma_s.mat').s_t;
 
-[N, ones]   = size(x_h0); 
+[N, one]   = size(x_h0); 
 
 %% Estimate the variances sigma_w_sq and sigma_s_sq
-sigma_w_sq_hat  = sum(abs(sigma_w_sq))/N;
-sigma_s_sq_hat  = sum(abs(sigma_s_sq))/N;
+sigma_w_sq_hat  = sum(abs(sigma_w).^2)/N;
+sigma_s_sq_hat  = sum(abs(sigma_s).^2)/N;
 
 
 %% Calculate the histogram for our data
