@@ -28,9 +28,10 @@ Here the datasets T3 are given and are to be used to verify that
 \end{align}
 are $\chi^2$-distributed with 2 degrees of freedom. Using this we can approximate that $\frac{2|x(0)|^2}{\sigma^2}$ has the point-distribution function $f(x) = \frac{1}{2}e^{-\frac{x}{2}}$ for $x>0$. Which is more manageable than the pdf for the complex gaussian so that it can be used to easily find the probability of detection and false alarm.
 
-\subsection{Task 4: NP detector with data set of $K$ samples}
-Here the one-sample detector derived in the previous tasks are expanded so it can be used when there are $K>1$ samples. Since $|x(n)|^2$ is a sum of two standard normal gaussian squared, then in the case where there are multiple samples, the $\chi^2$-distribution has $2K$ degrees of freedom which we can use to derive the threshold $\lambda'$ that maximizes $P_D$ and ensure that $P_{FA}<\alpha$.
+\subsection{Task 4: NP detector with data set of K samples}
+Here the one-sample detector derived in the previous tasks are expanded so it can be used when there are $K>1$ samples. Since $|x(n)|^2$ is a sum of two standard normal gaussian squared, then in the case where there are multiple samples, the $\chi^2$-distribution has $2K$ degrees of freedom which can be used to derive the threshold $\lambda'$ that maximizes $P_D$ and ensure that $P_{FA}<\alpha$.
 
+\todo{Task 5-8 needs to be rewritten/reformulated}
 \subsection{Task 5: Performance of the general NP detector}
 First compute the distribution of the test statistic obtained in the previous task under hypothesis $H_0$ and $H_1$. Plot the receiving operating characteristics.
 

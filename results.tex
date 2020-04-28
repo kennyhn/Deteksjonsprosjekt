@@ -1,5 +1,5 @@
 \section{Implementation and results}\label{sec:results}
-\subsection{Task 1: Model development}
+\subsection{Task 1: Model development}\todo{Vi må muligens flytte mye av dette over til "tasks" delen. Prøve å bare ha resultater her og ikke utregninger? Enig/ikke enig?}
 \begin{figure}[ht]
     \begin{subfigure}{.5\textwidth}
         \centering
@@ -72,6 +72,7 @@ This also means that the decision rule is to choose $H_1$ when $|x(0)|^2\geq\lam
 \begin{equation}
     \lambda' = \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}(\ln\lambda-\ln (\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}))
 \end{equation}\label{eq:lambda_prime}
+
 \subsection{Task 3: Performance of the one-sample detector}
 \begin{figure}[ht]
     \begin{subfigure}{.5\textwidth}
@@ -89,7 +90,8 @@ This also means that the decision rule is to choose $H_1$ when $|x(0)|^2\geq\lam
         \label{fig:chi_sq_h1}
     \end{subfigure}
 \end{figure}
-The probability for false alarm is the probability that $|x(0)|^2>\lambda'$, assumed that it is actually the null hypothesis that is correct. Instead of using the complex gaussian pdf we have shown that $2\frac{|x(0)|^2}{\sigma^2}$ under $H_0$ and $H_1$ can be approximated to be $\chi^2$ distributed meaning that
+The histogram shows that $|x[n]|^2$ is $\chi^2$-distributed and the difference between $H_0$ and $H_1$ is essentially the constant scaling factor given by the variances $\sigma_w^2$ and $\sigma_s^2$.
+The probability for false alarm is the probability that $|x(0)|^2>\lambda'$, assumed that it is actually the null hypothesis that is correct. The square of the complex gaussian variable has been shown with \ref{fig:chi_sq_h0} and \ref{fig:chi_sq_h1} to be $\chi^2$ distributed meaning that
 \begin{align}
     P_{FA} & = \text{Prob}\{|x(0)|\geq\lambda'\vert H_0\}\nonumber\\
     & = \frac{\sigma_w^2}{2}\int_{\lambda'}^{\infty}\frac{e^{-\frac{x}{2}}}{2}dx\nonumber\\
@@ -105,6 +107,7 @@ Furthermore the probability for detection is
     & = \frac{\sigma_w^2+\sigma_s^2}{2}e^{-\frac{\lambda'}{2}}\nonumber
 \end{align}
 Which also only holds for $\lambda'>0$\\
+
 \subsection{Task 4: Generalized for multiple samples}
 We take the one-sample-detector a step further and generalize it to use it for multiple samples. That is that the likelihood function is used to calculate the LRT so that we get
 \begin{align}
@@ -114,8 +117,24 @@ We take the one-sample-detector a step further and generalize it to use it for m
 \end{align}
 So the decision rule ends up being to choose $H_1$ when
 \begin{equation}
-    \sum_{n=0}^{K-1}|x(n)|^2 \geq \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}\left(\ln\lambda-K\ln\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}\right) = \lambda'
+    T(\mathbf{x}) = \sum_{n=0}^{K-1}|x(n)|^2 \geq \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}\left(\ln\lambda-K\ln\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}\right) = \lambda'
 \end{equation}
+Here $T(\mathbf{x})$ is a sum of $K$ complex Gaussian squared, meaning the pdf in this case is a $\chi^2$-distribution with $2K$ degrees of freedom. This means that
+\begin{align}
+    P_D & = \frac{\sigma_w^2+\sigma_s^2}{2}\int_{\lambda'}^{\infty}\frac{x^{K-1}e^{-\frac{x}{2}}}{2^K\Gamma(K)}dx\nonumber\\
+    & = \frac{\sigma_w^2+\sigma_s^2}{2^{K+1}\Gamma(K)}\int_{\lambda'}^{\infty}x^{K-1}e^{-\frac{x}{2}}dx = (\sigma_w^2\sigma_s^2)Q(\lambda')\\
+\end{align}
+Differentiating the integral with respect to $\lambda'$ it shows that $P_D$ is strictly decreasing and has extremal points at $\lambda'=0\vee\lambda'=\infty$. Which essentially means that $P_D$ is maximized when $\lambda'\in(0,\infty)$ is as small as possible. For the false alarm with the upper limit $\alpha_0$, its cumulative distribution function is
+\begin{align}
+    P_{FA} & = \frac{\sigma_w^2}{2^{K+1}\Gamma(K)}\int_{\lambda'}^{\infty}x^{K-1}e^{-\frac{x}{2}}dx = \sigma_w^2Q(\lambda') \leq \alpha_0
+\end{align}
+Which means that for the inequality to hold in addition to maximize the power of the test, need to choose $\lambda' = Q^{-1}(\frac{\alpha_0}{\sigma_w^2})$. Which inserted to obtain $P_D = (\sigma_w^2+\sigma_s^2)Q(Q^{-1}(\frac{\alpha_0}{\sigma_w^2}))$ results in
+\begin{equation}
+    P_D = \frac{\alpha_0(\sigma_w^2+\sigma_s^2)}{\sigma_w^2}
+\end{equation}\todo{meningen at denne her skal gå mot 1 når alpha0 går mot 1?}
+
+\subsection{Task 5: }
+
 \begin{enumerate}[i]
     \item What is this chapter about
     \item Matlab implementation
