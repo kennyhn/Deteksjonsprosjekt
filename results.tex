@@ -32,24 +32,37 @@
     \caption{The histograms compared to pdf of gaussian}
     \label{fig:gauss}
 \end{figure}
-
+In the calculations of the variance and expected value for the four distributions the results were:
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\multicolumn{2}{|l|}{Gaussian} & \multicolumn{2}{|l|}{BPSK}\\ \hline
+$\mathbb{E}\{s[n]$\} & $\mathbb{E}\{s_{r}[n]s_{i}[n]$\} & $\mathbb{E}\{s[n]$\} & $\mathbb{E}\{s_{r}[n]s_{i}[n]$\}\\
+\hline
+$0.53767-j2.0817\cdot10^{-16}$ & $1.707\cdot10^{-15}$ & $1-j6.5919\cdot10^{-17}$ & $2.4425\cdot10^{-15}$\\ 
+\hline
+\end{tabular}
+\caption{Shows the expected value for each distributions}
+\end{table}
+However looking at the histogram it seems like the expecte value is approximately $0$ anyways for all the four distributions.
 \subsection{Task 2: One-sample-detector}
 In this task only one sample is used meaning that the detection problem is in this case:
 \begin{align}
-    H_0 &: x(0) = w(0)\nonumber\\
-    H_1 &: x(0) = s(0)+w(0)\nonumber
+    H_0 &: x[0] = w[0]\nonumber\\
+    H_1 &: x[0] = s[0]+w[0]\nonumber
 \end{align}
 It is given from the problem that $w\thicksim\mathbb{C}\mathcal{N}(0, \sigma_w^2)$ and $s\thicksim\mathbb{C}\mathcal{N}(\mu_s, \sigma_s^2)$ which means that under $H_0$, $x$ is from same distribution as $w$ and thus a complex gaussian with same mean and variance as $w$. Under $H_1$, which is a sum of two complex gaussian distribution, $x$ also is from a complex gaussian distribution, however the mean and variance needs to be calculated.
-The mean of $x(0)$ under $H_1$ is\todo{Usikker på om det er vits med disse utregningene}
+The mean of $x[0]$ under $H_1$ is\todo{Usikker på om det er vits med disse utregningene}
 \begin{align}
-    \mathbb{E}\{x(0)\} & = \mathbb{E}\{s(0)+w(0)\}\nonumber\\
-    & = \mathbb{E}\{s(0)\} + \mathbb{E}\{w(0)\}\nonumber\\
+    \mathbb{E}\{x[0]\} & = \mathbb{E}\{s[0]+w[0]\}\nonumber\\
+    & = \mathbb{E}\{s[0]\} + \mathbb{E}\{w[0]\}\nonumber\\
     & = \mu_s + 0 = \mu_s\nonumber
 \end{align} 
-The variance of $x(0)$ under $H_1$ is
+The variance of $x[0]$ under $H_1$ is
 \begin{align}
-    \mathrm{Var}\{x(0)\} & = \mathrm{Var}\{s(0)+w(0)\}\nonumber\\
-    & = \mathrm{Var}\{s(0)\} + \mathrm{Var}\{w(0)\}\nonumber\\
+    \mathrm{Var}\{x[0]\} & = \mathrm{Var}\{s[0]+w[0]\}\nonumber\\
+    & = \mathrm{Var}\{s[0]\} + \mathrm{Var}\{w[0]\}\nonumber\\
     & = \sigma_s^2+\sigma_w^2\nonumber
 \end{align}
 Meaning that
@@ -59,18 +72,18 @@ Meaning that
 \end{align}
 Setting up the LRT:
 \begin{align}
-    L(x) & = \frac{p_1(x(0))}{p_0(x(0))} = \frac{\frac{1}{(\sigma_w^2+\sigma_s^2)\pi}e^{-\frac{|x(0)-\mu_s|^2}{\sigma_s^2+\sigma_w^2}}}{\frac{1}{\sigma_w^2\pi}e^{-\frac{|x(0)|^2}{\sigma_w^2}}}\nonumber\\
-    & = \frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}e^{-\frac{1}{\sigma_w^2+\sigma_s^2}|x(0)-\mu_s|^2+\frac{1}{\sigma_w^2}|x(0)|^2}\nonumber
+    L(x) & = \frac{p_1(x[0])}{p_0(x[0])} = \frac{\frac{1}{(\sigma_w^2+\sigma_s^2)\pi}e^{-\frac{|x[0]-\mu_s|^2}{\sigma_s^2+\sigma_w^2}}}{\frac{1}{\sigma_w^2\pi}e^{-\frac{|x[0]|^2}{\sigma_w^2}}}\nonumber\\
+    & = \frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}e^{-\frac{1}{\sigma_w^2+\sigma_s^2}|x[0]-\mu_s|^2+\frac{1}{\sigma_w^2}|x[0]|^2}\nonumber
 \end{align}
-Since it was shown in task 1 that $\mu_s \simeq 0$ this can be used to simplify the caluclations. The decision rule is to choose $H_1$ when $L(x) \geq \lambda$, since $L(x(0))$ is a monotonically increasing function then the inequality holds for $\ln L(x(0)) \geq \ln\lambda$.
+Since it is given that $\mu_s \approx 0$ this can be used to simplify the caluclations. The decision rule is to choose $H_1$ when $L(x[0]) \geq \lambda$, since $L(x[0])$ is a monotonically increasing function then the inequality holds for $\ln L(x[0]) \geq \ln\lambda$.
 \begin{align}
-    \ln L(x(0)) = \ln (\sigma_w^2)-\ln (\sigma_w^2+\sigma_s^2)-\frac{1}{\sigma_w^2+\sigma_s^2}|x(0)|^2+\frac{1}{\sigma_w^2}|x(0)|^2 \geq \ln\lambda\nonumber\\
-    (\frac{1}{\sigma_w^2}+\frac{1}{\sigma_s^2+\sigma_w^2})|x(0)|^2 \geq \ln\lambda-\ln (\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2})\nonumber\\
-    |x(0)|^2 = x_R(0)^2+x_I(0)^2 \geq \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}(\ln\lambda-\ln (\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2})) = \lambda'\nonumber
+    \ln L(x[0]) = \ln (\sigma_w^2)-\ln (\sigma_w^2+\sigma_s^2) & -\frac{1}{\sigma_w^2+\sigma_s^2}|x[0]|^2 +\frac{1}{\sigma_w^2}|x[0]|^2 \geq \ln\lambda\nonumber\\
+    \left(\frac{1}{\sigma_w^2}+\frac{1}{\sigma_s^2+\sigma_w^2}\right)|x[0]|^2 & \geq \ln\lambda-\ln \frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}\nonumber\\
+    |x[0]|^2 = x_R[0]^2+x_I[0]^2 & \geq \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}\left(\ln\lambda-\ln\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}\right) = \lambda'\nonumber
 \end{align}
-This also means that the decision rule is to choose $H_1$ when $|x(0)|^2\geq\lambda'$ and choose $H_0$ when $|x(0)|^2<\lambda'$ where
+This also means that the decision rule is to choose $H_1$ when $|x[0]|^2\geq\lambda'$ and choose $H_0$ when $|x[0]|^2<\lambda'$ where
 \begin{equation}
-    \lambda' = \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}(\ln\lambda-\ln (\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}))
+    \lambda' = \frac{\sigma_w^2(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}\left(\ln\lambda-\ln \frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}\right)
 \end{equation}\label{eq:lambda_prime}
 
 \subsection{Task 3: Performance of the one-sample detector}
@@ -90,21 +103,21 @@ This also means that the decision rule is to choose $H_1$ when $|x(0)|^2\geq\lam
         \label{fig:chi_sq_h1}
     \end{subfigure}
 \end{figure}
-The histogram shows that $|x[n]|^2$ is $\chi^2$-distributed and the difference between $H_0$ and $H_1$ is essentially the constant scaling factor given by the variances $\sigma_w^2$ and $\sigma_s^2$.
-The probability for false alarm is the probability that $|x(0)|^2>\lambda'$, assumed that it is actually the null hypothesis that is correct. The square of the complex gaussian variable has been shown with \ref{fig:chi_sq_h0} and \ref{fig:chi_sq_h1} to be $\chi^2$ distributed meaning that
+The histogram in \ref{fig:chi_sq_h0} and \ref{fig:chi_sq_h1} shows that $|x[0]|^2$ is $\chi^2$-distributed with 2 degrees of freedom both under $H_0$ and $H_1$ and the difference between $H_0$ and $H_1$ is essentially the constant scaling factor given by the variances $\sigma_w^2$ and $\sigma_s^2$.
+Calculating the probability for the false alarm gives
 \begin{align}
-    P_{FA} & = \text{Prob}\{|x(0)|\geq\lambda'\vert H_0\}\nonumber\\
-    & = \frac{\sigma_w^2}{2}\int_{\lambda'}^{\infty}\frac{e^{-\frac{x}{2}}}{2}dx\nonumber\\
-    & = -\frac{\sigma_w^2}{2}e^{-\frac{x}{2}}\bigg\rvert_{\lambda'}^{\infty}\nonumber\\
-    & = \frac{\sigma_w^2}{2}e^{-\frac{\lambda'}{2}}\nonumber
+    P_{FA} & = \text{Prob}\{|x[0]|\geq\lambda'\big\vert H_0\}\nonumber\\
+    & = \int_{\lambda'}^{\infty}\frac{e^{-\frac{2x[0]}{2\sigma_w^2}}}{\sigma_w^2}dx[0]\nonumber\\
+    & = -\frac{\sigma_w^2}{\sigma_w^2}e^{-\frac{x[0]}{\sigma_w^2}}\bigg\rvert_{\lambda'}^{\infty}\nonumber\\
+    & = e^{-\frac{\lambda'}{\sigma_w^2}}\nonumber
 \end{align}
 Which only holds when $\lambda'>0$.\\
 Furthermore the probability for detection is
 \begin{align}
-    P_D & = \text{Prob}\{|x(0)|\geq\lambda'\vert H_1\}\nonumber\\
-    & = \frac{\sigma_w^2+\sigma_s^2}{2}\int_{\lambda'}^{\infty}\frac{e^{-\frac{x}{2}}}{2}dx\nonumber\\
-    & = -\frac{\sigma_w^2+\sigma_s^2}{2}e^{-\frac{x}{2}}\bigg\rvert_{\lambda'}^{\infty}\nonumber\\
-    & = \frac{\sigma_w^2+\sigma_s^2}{2}e^{-\frac{\lambda'}{2}}\nonumber
+    P_D & = \text{Prob}\{|x[0]|\geq\lambda'\big\vert H_1\}\nonumber\\
+    & = \int_{\lambda'}^{\infty}\frac{e^{-\frac{x[0]}{\sigma_w^2+\sigma_s^2}}}{\sigma_w^2+\sigma_s^2}dx[0]\nonumber\\
+    & = -\frac{\sigma_w^2+\sigma_s^2}{\sigma_w^2+\sigma_s^2}e^{-\frac{x[0]}{\sigma_w^2+\sigma_s^2}}\bigg\rvert_{\lambda'}^{\infty}\nonumber\\
+    & = e^{-\frac{\lambda'}{\sigma_w^2+\sigma_s^2}}\nonumber
 \end{align}
 Which also only holds for $\lambda'>0$\\
 
@@ -121,19 +134,49 @@ So the decision rule ends up being to choose $H_1$ when
 \end{equation}
 Here $T(\mathbf{x})$ is a sum of $K$ complex Gaussian squared, meaning the pdf in this case is a $\chi^2$-distribution with $2K$ degrees of freedom. This means that
 \begin{align}
-    P_D & = \frac{\sigma_w^2+\sigma_s^2}{2}\int_{\lambda'}^{\infty}\frac{x^{K-1}e^{-\frac{x}{2}}}{2^K\Gamma(K)}dx\nonumber\\
-    & = \frac{\sigma_w^2+\sigma_s^2}{2^{K+1}\Gamma(K)}\int_{\lambda'}^{\infty}x^{K-1}e^{-\frac{x}{2}}dx = (\sigma_w^2\sigma_s^2)Q(\lambda')\\
+    P_D & = \int_{\lambda'}^{\infty}\frac{x^{K-1}e^{-\frac{x}{\sigma_w^2+\sigma_s^2}}}{(\sigma_w^2+\sigma_s^2)^K\Gamma(K)}dx\nonumber\\
+    & = \frac{1}{(\sigma_w^2+\sigma_s^2)^K\Gamma(K)}\int_{\lambda'}^{\infty}x^{K-1}e^{-\frac{x}{\sigma_w^2+\sigma_s^2}}dx\nonumber\\
+    & = Q\left(\frac{\lambda'}{\sigma_w^2+\sigma_s^2}\right)
 \end{align}
-Differentiating the integral with respect to $\lambda'$ it shows that $P_D$ is strictly decreasing and has extremal points at $\lambda'=0\vee\lambda'=\infty$. Which essentially means that $P_D$ is maximized when $\lambda'\in(0,\infty)$ is as small as possible. For the false alarm with the upper limit $\alpha_0$, its cumulative distribution function is
+Differentiating the integral with respect to $\lambda'$ it shows that $P_D$ is strictly decreasing and has extremal points at $\lambda'=0\vee\lambda'=\infty$. Which essentially means that $P_D$ is maximized when $\lambda'\in[0,\infty)$ is as close to $0$ as possible. For the false alarm with the upper limit $\alpha_0$, its cumulative distribution function is
 \begin{align}
-    P_{FA} & = \frac{\sigma_w^2}{2^{K+1}\Gamma(K)}\int_{\lambda'}^{\infty}x^{K-1}e^{-\frac{x}{2}}dx = \sigma_w^2Q(\lambda') \leq \alpha_0
+    P_{FA} & = \frac{1}{(\sigma_w^2)^K\Gamma(K)}\int_{\lambda'}^{\infty}x^{K-1}e^{-\frac{x}{\sigma_w^2}}dx\nonumber\\
+    & = \frac{1}{\sigma_w^2}Q\left(\frac{\lambda'}{\sigma_w^2}\right) \leq \alpha_0
 \end{align}
-Which means that for the inequality to hold in addition to maximize the power of the test, need to choose $\lambda' = Q^{-1}(\frac{\alpha_0}{\sigma_w^2})$. Which inserted to obtain $P_D = (\sigma_w^2+\sigma_s^2)Q(Q^{-1}(\frac{\alpha_0}{\sigma_w^2}))$ results in
+
+Which means that for the inequality to hold in addition to maximize the power of the test, need to choose $\lambda' >= \sigma_w^2Q^{-1}\left(\alpha_0\right)$. Essentially choosing $\lambda' = \sigma_w^2Q^{-1}\left(\alpha_0\right)$ to minimize $P_D$. Inserting this to get the expression for $P_D$.
 \begin{equation}
-    P_D = \frac{\alpha_0(\sigma_w^2+\sigma_s^2)}{\sigma_w^2}
-\end{equation}\todo{meningen at denne her skal gå mot 1 når alpha0 går mot 1?}
+    P_D = Q(\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}Q^{-1}\left(\alpha_0\right))
+\end{equation}
 
 \subsection{Task 5: }
+
+
+\subsection{Task 6: Central limit theorem}
+By the central limit theorem that states that for $T(\mathbf{x}) = \sum_{n=0}^{K-1}|x[n]|^2$, that $T(\mathbf{x})$ converges to a Gaussian distribution when $|x[n]|^2$ comes from a independent identical distribution with finite expected value $\mu$ and finite variance $\sigma^2$. Already know that $|x[n]|$ is complex gaussian and iid for each sample $n = 0, \dots, K-1$ so $|x[n]|^2$ is also iid.\\ \todo{Kanskje vi skal lage et plot her der vi lar doF gå mot et stort tall, for å vise at vi får en normalfordeling}
+In this case the mean is
+\begin{align}
+    \mathbb{E}\left\{T(\mathbf{x})\right\} & = \mathbb{E}\{\sum_{n=0}^{K-1}|x[n]|^2\}\nonumber\\
+    & = \sum_{n=0}^{K-1}\mathbb{E}\{|x[n]^2|\} = \hat{\mu}
+\end{align}
+and the variance is
+\begin{align}
+    \mathrm{Var}\left\{T(\mathbf{x})\right\} & = \mathrm{Var}\{\sum_{n=0}^{K-1}|x[n]|^2\}\nonumber\\
+    & = \sum_{n=0}^{K-1}\mathrm{Var}\{|x[n]^2|\} = \hat{\sigma}^2
+\end{align}
+Which gives the pdf of a normal gaussian
+\begin{equation}
+    f(x) = \frac{1}{\sqrt{2\pi\hat{\sigma}^2}}e^{-\frac{1}{2}\left(\frac{x-\hat{\mu}}{\hat{\sigma}^2}\right)^2}
+\end{equation}
+
+
+
+
+
+
+\subsection{Task 7: How many samples do we need for it to be good enough}
+
+\subsection{Task 8: Test with data}
 
 \begin{enumerate}[i]
     \item What is this chapter about
