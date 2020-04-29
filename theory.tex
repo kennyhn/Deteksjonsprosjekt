@@ -25,6 +25,15 @@ Furthermore the Gamma distribution is also a distribution that is going to be us
 where $\nu$ is the distributions degrees of freedom.
 
 \subsection{Estimators}
+The definition of expected value of discrete random variables is
+\begin{equation}
+    \mu = \mathbb{E}\{X\} = \sum_{i=0}^{\infty}x_ip(x_i)
+\end{equation}\label{eq:expecteddef}
+Which gives some nice properties for the estimators.\\
+Furthermore the variance of discrete random variables is defined by
+\begin{equation}
+    \sigma^2 = \text{Var}\{X\} = \mathbb{E}\{X^2\}-\mathbb{E}\{X\}^2
+\end{equation}\label{eq:variancedef}
 When we with probable cause can say something about the distribution that the random variables are sampled from, but not their mean and/or variance, we can estimate these distributions properties. Assumed that the random variables are sampled independent from the same identical distribution (iid), then the mean can be estimated with the average of the samples, which is unbiased.
 \begin{align}
 	\hat{\mu} & = \mathbb{E}\{\frac{1}{N}\sum_{n=0}^{N-1}x\}\nonumber\\

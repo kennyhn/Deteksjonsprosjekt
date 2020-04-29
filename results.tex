@@ -45,7 +45,7 @@ $0.53767-j2.0817\cdot10^{-16}$ & $1.707\cdot10^{-15}$ & $1-j6.5919\cdot10^{-17}$
 \end{tabular}
 \caption{Shows the expected value for each distributions}
 \end{table}
-However looking at the histogram it seems like the expected value is approximately at $0$ anyways for all the four distributions.
+However looking at the histogram it seems like the expected value is approximately at $0$ anyways for all the four distributions.\todo{Kommenter observasjonene, er det kanskje rett at vi kan sette forventningen lik 0?}
 \subsection{Task 2: One-sample-detector}
 In this task only one sample is used meaning that the detection problem is in this case:
 \begin{align}
@@ -177,15 +177,25 @@ By the central limit theorem that states that for $T(\mathbf{x}) = \sum_{n=0}^{K
 in figure \ref{fig:chitogauss} notice that for higher degrees of freedom, which essentially means for more samples, the pdf of the $\chi^2$ distributions looks more and more like the Gaussian distribution with mean equal to the degrees of freedom.\\
 In this case the mean is
 \begin{align}
-    \mathbb{E}\left\{T(\mathbf{x})\right\} & = \mathbb{E}\{\sum_{n=0}^{K-1}|x[n]|^2\}\nonumber\\
-    & = \sum_{n=0}^{K-1}\mathbb{E}\{|x[n]^2|\} = \hat{\mu}
+    \hat{\mu} = \mathbb{E}\left\{T(\mathbf{x})\right\} & = \mathbb{E}\{\sum_{n=0}^{K-1}|x[n]|^2\}\nonumber\\
+    & = \sum_{n=0}^{K-1}\mathbb{E}\{|x[n]^2|\}\nonumber\\
+    & = \sum_{n=0}^{K-1}(\text{Var}\{|x[n]|\}+\mathbb{E}\{|x[n]|\}^2)\nonumber\\
+    & = \begin{cases}
+    K\sigma_w^2, & \text{under} H_0\\
+    K(\sigma_w^2+\sigma_s^2), & \text{under} H_1
+    \end{cases}
 \end{align}
 and the variance is
 \begin{align}
-    \mathrm{Var}\left\{T(\mathbf{x})\right\} & = \mathrm{Var}\{\sum_{n=0}^{K-1}|x[n]|^2\}\nonumber\\
-    & = \sum_{n=0}^{K-1}\mathrm{Var}\{|x[n]^2|\} = \hat{\sigma}^2
-\end{align}
-Which gives the pdf of a normal gaussian
+    \hat{\sigma^2} = \mathrm{Var}\left\{T(\mathbf{x})\right\} & = \mathrm{Var}\{\sum_{n=0}^{K-1}|x[n]|^2\}\nonumber\\
+    & = \sum_{n=0}^{K-1}\mathrm{Var}\{|x[n]|^2\}\nonumber\\
+    & = \sum_{n=0}^{K-1}Var\{|x[n]|\}^2\nonumber\\
+    & = \begin{cases}
+    K\sigma_w^4, & \text{under} H_0\\
+    K(\sigma_s^2+\sigma_w^2)^2, & \text{under} H_1
+    \end{cases}
+\end{align}\todo{Jeg vet ikke hvordan man skal bevise det med triks som i ligning 25, men jeg vet at det er dette svaret vi skal komme frem til (ligning 26)}
+Which gives the pdf of a normal gaussian for each of the cases as
 \begin{equation}
     f(x) = \frac{1}{\sqrt{2\pi\hat{\sigma}^2}}e^{-\frac{1}{2}\left(\frac{x-\hat{\mu}}{\hat{\sigma}^2}\right)^2}
 \end{equation}
@@ -196,7 +206,7 @@ Which gives the pdf of a normal gaussian
 
 
 
-\subsection{Task 7: How many samples do we need for it to be good enough}
+\subsection{Task 7: Detector complexity}
 
 \subsection{Task 8: Test with data}
 
