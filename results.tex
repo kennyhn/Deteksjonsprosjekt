@@ -149,17 +149,32 @@ Which means that for the inequality to hold in addition to maximize the power of
     P_D = \frac{1}{\sigma_w^2+\sigma_s^2}Q(\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}Q^{-1}\left(\alpha_0\right))
 \end{equation}
 
-\subsection{Task 5: }
-As mentioned in the task before, 
-
-\subsection{Task 6: Central limit theorem}
-By the central limit theorem that states that for $T(\mathbf{x}) = \sum_{n=0}^{K-1}|x[n]|^2$, that $T(\mathbf{x})$ converges to a Gaussian distribution when $|x[n]|^2$ comes from a independent identical distribution with finite expected value $\mu$ and finite variance $\sigma^2$. Already know that $|x[n]|$ is complex gaussian and iid for each sample $n = 0, \dots, K-1$ so $|x[n]|^2$ is also iid.\\
+\subsection{Task 5: Performance of the general detector}
+$\chi^2(k)$ is a special case of the Gamma distribution where it has $k/2$ degrees of freedom. Using this and the fact that $Q\sim\chi^2$ has the property that $cQ\sim Gamma(k/2, 2c)$. $T(x)$ has $K$ degrees of freedom in the Gamma distribution. Furthermore under $H_0$, $T(x)$ is scaled such that $c = \frac{\sigma_w^2}{2}$ which gives the point distribution function
+\begin{equation}
+    p(x) = \frac{x^{K-1}e^{-\frac{x}{\sigma_w^2}}}{\Gamma(K)\sigma_w^{2K}}
+\end{equation}
+Similarly for $T(x)$ under $H_1$ has the scaling constant $c = \frac{\sigma_w^2+\sigma_s^2}{2}$ and thus the point distribution function
+\begin{equation}
+    p(x) = \frac{x^{K-1}e^{-\frac{x}{\sigma_w^2+\sigma_s^2}}}{\Gamma(K)(\sigma_w^{2}+\sigma_s^2)}
+\end{equation}.\\
+In figure \ref{fig:roc} the curves become better for increasing doF. This means that if the test statistic $T(x)$ has more samples, the power of the test gets better.
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{figures/chi_square}
-    \caption{Caption}
-    \label{fig:my_label}
+    \includegraphics[width=\textwidth]{figures/roc2.eps}
+    \caption{The receiver operating characteristics with different doF}
+    \label{fig:roc}
+\end{figure}\todo{Jeg skal lage nytt plot der skriften er litt større}
+
+\subsection{Task 6: Central limit theorem}
+By the central limit theorem that states that for $T(\mathbf{x}) = \sum_{n=0}^{K-1}|x[n]|^2$, that $T(\mathbf{x})$ converges to a Gaussian distribution when $|x[n]|^2$ comes from a independent identical distribution with finite expected value $\mu$ and finite variance $\sigma^2$. Already know that $|x[n]|$ is complex gaussian and iid for each sample $n = 0, \dots, K-1$, so $|x[n]|^2$ is also iid.\\
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chi_square.eps}
+    \caption{The pdf of $\chi^2$ for different degrees of freedom}
+    \label{fig:chitogauss}
 \end{figure}
+in figure \ref{fig:chitogauss} notice that for higher degrees of freedom, which essentially means for more samples, the pdf of the $\chi^2$ distributions looks more and more like the Gaussian distribution with mean equal to the degrees of freedom.\\
 In this case the mean is
 \begin{align}
     \mathbb{E}\left\{T(\mathbf{x})\right\} & = \mathbb{E}\{\sum_{n=0}^{K-1}|x[n]|^2\}\nonumber\\
