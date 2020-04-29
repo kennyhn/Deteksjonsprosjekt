@@ -26,14 +26,14 @@ Here the datasets T3 are given and are to be used to verify that
 	H_0 &: \frac{2x_R^2(0)}{\sigma_w^2}+\frac{2x_I^2(0)}{\sigma_w^2}=\frac{2|x(0)|^2}{\sigma_w^2}\label{eq:chi_sq_h0}\\
 	H_1 &: \frac{2x_R^2(0)}{\sigma_w^2+\sigma_s^2}+\frac{2x_I^2(0)}{\sigma_w^2+\sigma_s^2}=\frac{2|x(0)|^2}{\sigma_w^2+\sigma_s^2}\label{eq:chi_sq_h1}
 \end{align}
-are $\chi^2$-distributed with 2 degrees of freedom. Using this we can approximate that $\frac{2|x(0)|^2}{\sigma^2}$ has the point-distribution function $f(x) = \frac{1}{2}e^{-\frac{x}{2}}$ for $x>0$. Which is more manageable than the pdf for the complex gaussian so that it can be used to easily find the probability of detection and false alarm.
+are $\chi^2$-distributed with 2 degrees of freedom. Using this it can be used to show that $\widetilde{x} = \frac{2|x(0)|^2}{\sigma^2}$ has the point-distribution function $f(\widetilde{x}) = \frac{1}{2}e^{-\frac{\widetilde{x}}{2}}$ for $\widetilde{x}>0$. This can then be used to calculate the probability for false alarm and the probability for detection for this one-sample detector.
 
-\subsection{Task 4: NP detector with data set of K samples}
-Here the one-sample detector derived in the previous tasks are expanded so it can be used when there are $K>1$ samples. Since $|x(n)|^2$ is a sum of two standard normal gaussian squared, then in the case where there are multiple samples, the $\chi^2$-distribution has $2K$ degrees of freedom which can be used to derive the threshold $\lambda'$ that maximizes $P_D$ and ensure that $P_{FA}<\alpha$.
+\subsection{Task 4: General NP detector}
+In this task the one-sample detector derived in the previous tasks are expanded so it can be used when there are $K>1$ samples. Since $|x(n)|^2$ is a sum of two standard normal gaussian square, then in the case where there are multiple samples, the $\chi^2$-distribution has $2K$ degrees of freedom which can be used to derive the threshold $\lambda'$ that maximizes $P_D$ and ensure that $P_{FA}<\alpha$.
 
 \todo{Task 5-8 needs to be rewritten/reformulated}
 \subsection{Task 5: Performance of the general NP detector}
-First compute the distribution of the test statistic obtained in the previous task under hypothesis $H_0$ and $H_1$. Plot the receiving operating characteristics.
+The test statistic 
 
 \subsection{Task 6: Approximate performance of the general NP detector}
 Central limit theorem to approximate the characteristic test statistic as a gaussian random variable and compute the PDF of the test statistic. Plot $P_D$ and $P_{FA}$ as a function of the threshold.
