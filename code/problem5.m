@@ -1,8 +1,10 @@
 clc; clear all; close all
 
 %% Data handling
-sigma_w  = load('Dataset/T3_data_sigma_w.mat').w;
-sigma_s  = load('Dataset/T3_data_sigma_s.mat').s_t;
+sigma_w  = load(['Dataset/' ...
+    'T3_data_sigma_w.mat']).w;
+sigma_s  = load(['Dataset/'...
+    'T3_data_sigma_s.mat']).s_t;
 
 [K, one]    = size(sigma_w);
 
@@ -10,24 +12,54 @@ sigma_s  = load('Dataset/T3_data_sigma_s.mat').s_t;
 sigma_w_sq_hat  = sum(abs(sigma_w).^2)/K;
 sigma_s_sq_hat  = sum(abs(sigma_s).^2)/K;
 
-x           = 0:0.01:100;
-num_samples = 20;
-doF         = 2*num_samples;
-chi_sq      = pdf('Chisquare', x, doF)';
-
-chi_sq_h0   = (sigma_w_sq_hat/2)*chi_sq;
-chi_sq_h1   = ((sigma_w_sq_hat+sigma_s_sq_hat)/2)*chi_sq;
-
 
 %% Figures
+x           = 0:0.01:300;
+
 figure(1);
-title('$Something about \chi^2$', 'Interpreter', 'latex');
+title('$\chi^2 distribution$',...
+    'Interpreter', 'latex');
 hold on
-plot(x, chi_sq_h0, 'Linewidth', 1);
+for k = (0:2)
+	doF         = 2*10^k;
+    chi_sq      = pdf('Chisquare', x, doF)';
+    plot(x, chi_sq, 'Linewidth', 1,...
+        'DisplayName', ['doF: '...
+        num2str(doF)]);
+    hold on
+end
+legend('show');
 hold on
-plot(x, chi_sq_h1, '--', 'Linewidth', 1);
+xlabel('x');
+hold on
+ylabel('p(x)');
 hold on
 grid on;
-hold on;
-legend('P(T(\textbf{x}$|H_0$)', 'P(T(\textbf{x}$|H_1$)', 'Interpreter', 'latex');
 hold off
+
+
+%% Calculate and plot ROC
+figure(2);
+title('ROC for different values of doF');
+hold on
+
+for i = (0:3)
+    doF     = 2*10^i;
+    x       = 0:0.1:2500;
+    p_FA    = 1-gamcdf(x, doF, sigma_w_sq_hat);
+    p_D     = 1-gamcdf(x, doF, ...
+        (sigma_w_sq_hat+sigma_s_sq_hat));
+    plot(p_FA, p_D, 'Linewidth', 1,...
+        'DisplayName', ['doF: ' num2str(2*10^i)]);
+    hold on
+    
+end
+legend('show');
+hold on
+grid on;
+hold on
+xlabel('$p_{FA}$', 'Interpreter', 'latex');
+hold on
+ylabel('$p_{D}$', 'Interpreter', 'latex');
+hold off;
+

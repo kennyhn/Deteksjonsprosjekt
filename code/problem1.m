@@ -42,7 +42,7 @@ s_expected_gauss            = sr_expected_gauss + 1i*si_expected_gauss;
 
 sr_expected_bpsk            = sum(s_bpsk_real)/N;  
 si_expected_bpsk            = sum(s_bpsk_imag)/N;
-s_expected_bpsk             = sr_expected_bpsk + 1i*sr_expected_bpsk;
+s_expected_bpsk             = sr_expected_bpsk + 1i*si_expected_bpsk;
 
 % When samples are taken uniformly from the same population with any
 % distribution the expected value of the mean is always unbiased
