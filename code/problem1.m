@@ -71,35 +71,35 @@ x = (-80:0.1:80)';
 
 %% Plot histograms of the sampled data Gaussian
 figure(1);
-title('Real gaussian');
+title('Real gaussian', 'fontsize', 22);
 hold on
 histogram(s_gauss_real, 'Normalization', 'pdf');
 hold on
 plot(x, px_r.pdf(x), '--', 'Linewidth', 1)
 hold on
-xlabel('x');
+xlabel('x', 'Interpreter', 'latex', 'fontsize', 14);
 hold on
-ylabel('p(x)');
+ylabel('p(x)', 'Interpreter', 'latex', 'fontsize', 14);
 hold on
 grid on;
 legend('histogram', 'true pdf, $\sigma^2 = 980$',...
-    'Interpreter', 'latex');
+    'Interpreter', 'latex', 'fontsize', 18);
 hold off;
 
 figure(2);
-title('Imaginary gaussian');
+title('Imaginary gaussian', 'fontsize', 22);
 hold on
 histogram(s_gauss_imag, 'Normalization', 'pdf');
 hold on
 plot(x, px_i.pdf(x), '--', 'Linewidth', 1)
 hold on
-xlabel('x');
+xlabel('x', 'Interpreter', 'latex', 'fontsize', 14);
 hold on
-ylabel('p(x)');
+ylabel('p(x)', 'Interpreter', 'latex', 'fontsize', 14);
 hold on
 grid on;
 legend('histogram', 'true pdf, $\sigma^2 = 980$',...
-    'Interpreter', 'latex');
+    'Interpreter', 'latex', 'fontsize', 18);
 hold off;
 
 %% BPSK Create a generic complex point distribution
@@ -114,35 +114,35 @@ px_i            = makedist('Normal', 'mu', 0,...
 x = (-80:0.1:80)';
 
 figure(3);
-title('Real BPSK');
+title('Real BPSK', 'fontsize', 22);
 hold on
 histogram(s_bpsk_real, 'Normalization', 'pdf');
 hold on
 plot(x, px_r.pdf(x), '--', 'Linewidth', 1)
 hold on
-xlabel('x');
+xlabel('x', 'Interpreter', 'latex', 'fontsize', 14);
 hold on
-ylabel('p(x)');
+ylabel('p(x)', 'Interpreter', 'latex', 'fontsize', 14);
 hold on
 grid on;
 legend('histogram', 'true pdf, $\sigma^2 = 800$',...
-    'Interpreter', 'latex');
+    'Interpreter', 'latex', 'fontsize', 18);
 hold off;
 
 figure(4);
-title('Imaginary BPSK');
+title('Imaginary BPSK', 'fontsize', 22);
 hold on
 histogram(s_bpsk_real, 'Normalization', 'pdf');
 hold on
 plot(x, px_i.pdf(x), '--', 'Linewidth', 1)
 hold on
-xlabel('x');
+xlabel('x', 'Interpreter', 'latex', 'fontsize', 14);
 hold on
-ylabel('p(x)');
+ylabel('p(x)', 'Interpreter', 'latex', 'fontsize', 14);
 hold on
 grid on;
 legend('histogram', 'true pdf, $\sigma^2 = 800$',...
-    'Interpreter', 'latex');
+    'Interpreter', 'latex', 'fontsize', 18);
 hold off;
 
 

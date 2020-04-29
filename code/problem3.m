@@ -38,21 +38,25 @@ chi_sq      = pdf('Chisquare', x, doF)';
 
 figure(1);
 title('Comparing $H_0$ with $\chi^2$',...
-    'Interpreter', 'latex');
+    'Interpreter', 'latex', 'fontsize', 22);
 hold on
 histogram(chi_sq_h0, 'Normalization', 'pdf');
 hold on
 plot(x, chi_sq, '--', 'Linewidth', 1);
 hold on
 grid on;
-hold on;
+hold on
 legend('Histogram of $H_0$','$pdf of \chi^2$',...
-    'Interpreter', 'latex');
+    'Interpreter', 'latex', 'fontsize', 18);
+hold on
+xlabel('x', 'Interpreter', 'latex', 'fontsize', 14)
+hold on
+ylabel('p(x)', 'Interpreter', 'latex', 'fontsize', 14)
 hold off
 
 figure(2);
 title('Comparing $H_1$ with $\chi^2$',...
-    'Interpreter', 'latex');
+    'Interpreter', 'latex', 'fontsize', 22);
 hold on
 histogram(chi_sq_h1, 'Normalization', 'pdf');
 hold on
@@ -61,5 +65,9 @@ hold on
 grid on;
 hold on;
 legend('Histogram of $H_1$', 'pdf of $\chi^2$',...
-    'Interpreter', 'latex');
+    'Interpreter', 'latex', 'fontsize', 18);
+hold on
+xlabel('x', 'Interpreter', 'latex', 'fontsize', 14)
+hold on
+ylabel('p(x)', 'Interpreter', 'latex', 'fontsize', 14)
 hold off

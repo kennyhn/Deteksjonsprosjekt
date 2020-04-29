@@ -18,7 +18,7 @@ x           = 0:0.01:300;
 
 figure(1);
 title('$\chi^2 distribution$',...
-    'Interpreter', 'latex');
+    'Interpreter', 'latex', 'fontsize', 22);
 hold on
 for k = (0:2)
 	doF         = 2*10^k;
@@ -28,11 +28,11 @@ for k = (0:2)
         num2str(doF)]);
     hold on
 end
-legend('show');
+legend('show', 'fontsize', 18);
 hold on
-xlabel('x');
+xlabel('x', 'fontsize', 14);
 hold on
-ylabel('p(x)');
+ylabel('p(x)', 'fontsize', 14);
 hold on
 grid on;
 hold off
@@ -40,7 +40,7 @@ hold off
 
 %% Calculate and plot ROC
 figure(2);
-title('ROC for different values of doF');
+title('ROC for different values of doF', 'fontsize', 22);
 hold on
 
 for i = (0:3)
@@ -54,12 +54,14 @@ for i = (0:3)
     hold on
     
 end
-legend('show');
+legend('show', 'fontsize', 18);
 hold on
 grid on;
 hold on
-xlabel('$p_{FA}$', 'Interpreter', 'latex');
+xlabel('$p_{FA}$', 'Interpreter', 'latex',...
+    'fontsize', 14);
 hold on
-ylabel('$p_{D}$', 'Interpreter', 'latex');
+ylabel('$p_{D}$', 'Interpreter', 'latex',...
+    'fontsize', 14);
 hold off;
 
