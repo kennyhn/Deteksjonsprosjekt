@@ -156,7 +156,7 @@ $\chi^2(k)$ is a special case of the Gamma distribution where it has $k/2$ degre
 \end{equation}
 Similarly for $T(x)$ under $H_1$ has the scaling constant $c = \frac{\sigma_w^2+\sigma_s^2}{2}$ and thus the point distribution function
 \begin{equation}
-    p(x) = \frac{x^{K-1}e^{-\frac{x}{\sigma_w^2+\sigma_s^2}}}{\Gamma(K)(\sigma_w^{2}+\sigma_s^2)}
+    p(x) = \frac{x^{K-1}e^{-\frac{x}{\sigma_w^2+\sigma_s^2}}}{\Gamma(K)(\sigma_w^{2}+\sigma_s^2)^K}
 \end{equation}.\\
 In figure \ref{fig:roc} the curves become better for increasing doF. This means that if the test statistic $T(x)$ has more samples, the power of the test gets better.
 \begin{figure}
@@ -164,7 +164,7 @@ In figure \ref{fig:roc} the curves become better for increasing doF. This means 
     \includegraphics[width=\textwidth]{figures/roc2.eps}
     \caption{The receiver operating characteristics with different doF}
     \label{fig:roc}
-\end{figure}\todo{Jeg skal lage nytt plot der skriften er litt større}
+\end{figure}
 
 \subsection{Task 6: Central limit theorem}
 By the central limit theorem that states that for $T(\mathbf{x}) = \sum_{n=0}^{K-1}|x[n]|^2$, that $T(\mathbf{x})$ converges to a Gaussian distribution when $|x[n]|^2$ comes from a independent identical distribution with finite expected value $\mu$ and finite variance $\sigma^2$. Already know that $|x[n]|$ is complex gaussian and iid for each sample $n = 0, \dots, K-1$, so $|x[n]|^2$ is also iid.\\
@@ -189,12 +189,12 @@ and the variance is
 \begin{align}
     \hat{\sigma^2} = \mathrm{Var}\left\{T(\mathbf{x})\right\} & = \mathrm{Var}\{\sum_{n=0}^{K-1}|x[n]|^2\}\nonumber\\
     & = \sum_{n=0}^{K-1}\mathrm{Var}\{|x[n]|^2\}\nonumber\\
-    & = \sum_{n=0}^{K-1}Var\{|x[n]|\}^2\nonumber\\
+    & = \sum_{n=0}^{K-1}(\mathbb{E}\{|x[n]|^4\}-\mathbb{E}\{|x[n]|^2\}^2\nonumber)\\
     & = \begin{cases}
     K\sigma_w^4, & \text{under} H_0\\
     K(\sigma_s^2+\sigma_w^2)^2, & \text{under} H_1
     \end{cases}
-\end{align}\todo{Jeg vet ikke hvordan man skal bevise det med triks som i ligning 25, men jeg vet at det er dette svaret vi skal komme frem til (ligning 26)}
+\end{align}\todo{Jeg vet ikke hvordan man skal bevise det med triks som i ligning 25, men jeg tror at det er dette svaret vi skal komme frem til (ligning 26) ved å se på variansen til gammafordeling på wikipedia.}
 Which gives the pdf of a normal gaussian for each of the cases as
 \begin{equation}
     f(x) = \frac{1}{\sqrt{2\pi\hat{\sigma}^2}}e^{-\frac{1}{2}\left(\frac{x-\hat{\mu}}{\hat{\sigma}^2}\right)^2}
