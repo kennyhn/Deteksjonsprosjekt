@@ -141,24 +141,24 @@ Here $T(\mathbf{x})$ is a sum of $K$ complex Gaussian squared, meaning the pdf i
 Differentiating the integral with respect to $\lambda'$ it shows that $P_D$ is strictly decreasing and has extremal points at $\lambda'=0\vee\lambda'=\infty$. Which essentially means that $P_D$ is maximized when $\lambda'\in[0,\infty)$ is as close to $0$ as possible. For the false alarm with the upper limit $\alpha_0$, its cumulative distribution function is
 \begin{align}
     P_{FA} & = \frac{1}{(\sigma_w^2)^K\Gamma(K)}\int_{\lambda'}^{\infty}x^{K-1}e^{-\frac{x}{\sigma_w^2}}dx\nonumber\\
-    & = \frac{1}{\sigma_w^2}Q\left(\frac{\lambda'}{\sigma_w^2}\right) \leq \alpha_0
+    & = Q\left(\frac{\lambda'}{\sigma_w^2}\right) \leq \alpha_0
 \end{align}
 
 Which means that for the inequality to hold in addition to maximize the power of the test, need to choose $\lambda' >= \sigma_w^2Q^{-1}\left(\alpha_0\right)$. Essentially choosing $\lambda' = \sigma_w^2Q^{-1}\left(\alpha_0\right)$ to minimize $P_D$. Inserting this to get the expression for $P_D$.
 \begin{equation}
-    P_D = \frac{1}{\sigma_w^2+\sigma_s^2}Q(\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}Q^{-1}\left(\alpha_0\right))
+    P_D = Q(\frac{\sigma_w^2}{\sigma_w^2+\sigma_s^2}Q^{-1}\left(\alpha_0\right))
 \end{equation}
 
 \subsection{Task 5: Performance of the general detector}
-$\chi^2(k)$ is a special case of the Gamma distribution where it has $k/2$ degrees of freedom. Using this and the fact that $Q\sim\chi^2$ has the property that $cQ\sim Gamma(k/2, 2c)$. $T(x)$ has $K$ degrees of freedom in the Gamma distribution. Furthermore under $H_0$, $T(x)$ is scaled such that $c = \frac{\sigma_w^2}{2}$ which gives the point distribution function
+$\chi^2(k)$ is a special case of the Gamma distribution where it has $k/2$ degrees of freedom. Using this and the fact that $Q\sim\chi^2$ has the property that $cQ\sim Gamma(k/2, 2c)$. $T(\mathbf{x})$ has $K$ degrees of freedom in the Gamma distribution. Furthermore under $H_0$, $T(\mathbf{x})$ is scaled such that $c = \frac{\sigma_w^2}{2}$ which gives the point distribution function
 \begin{equation}
     p(x) = \frac{x^{K-1}e^{-\frac{x}{\sigma_w^2}}}{\Gamma(K)\sigma_w^{2K}}
 \end{equation}
-Similarly for $T(x)$ under $H_1$ has the scaling constant $c = \frac{\sigma_w^2+\sigma_s^2}{2}$ and thus the point distribution function
+Similarly for $T(\mathbf{x})$ under $H_1$ has the scaling constant $c = \frac{\sigma_w^2+\sigma_s^2}{2}$ and thus the point distribution function
 \begin{equation}
     p(x) = \frac{x^{K-1}e^{-\frac{x}{\sigma_w^2+\sigma_s^2}}}{\Gamma(K)(\sigma_w^{2}+\sigma_s^2)^K}
 \end{equation}.\\
-In figure \ref{fig:roc} the curves become better for increasing doF. This means that if the test statistic $T(x)$ has more samples, the power of the test gets better.
+In figure \ref{fig:roc} the curves become better for increasing doF. This means that if the test statistic $T(\mathbf{x})$ has more samples, the power of the test gets better.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/roc2.eps}
@@ -197,16 +197,63 @@ and the variance is
 \end{align}\todo{Jeg vet ikke hvordan man skal bevise det med triks som i ligning 25, men jeg tror at det er dette svaret vi skal komme frem til (ligning 26) ved å se på variansen til gammafordeling på wikipedia.}
 Which gives the pdf of a normal gaussian for each of the cases as
 \begin{equation}
-    f(x) = \frac{1}{\sqrt{2\pi\hat{\sigma}^2}}e^{-\frac{1}{2}\left(\frac{x-\hat{\mu}}{\hat{\sigma}^2}\right)^2}
+    f(x) = \frac{1}{\sqrt{2\pi\hat{\sigma}^2}}e^{-\frac{1}{2}\left(\frac{x-\hat{\mu}}{\hat{\sigma}}\right)^2}
 \end{equation}
-
-
-
+This results in the two figures in for $T(\mathbf{x})$ under $H_0$ and $H_1$ in figure \ref{fig:clt}
+\begin{figure}[ht]
+    \begin{subfigure}{\textwidth}
+        \centering
+        % include first image
+        \includegraphics[width=.8\linewidth]{figures/gauss_vs_gamma_h0.eps}  
+        \caption{Normal vs Gamma distribution under $H_0$}
+        \label{fig:gaussvsgamma_h0}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \centering
+        % include second image
+        \includegraphics[width=.8\linewidth]{figures/gauss_vs_gamma_h1.eps}  
+        \caption{Normal vs Gamma distribution under $H_1$}
+        \label{fig:gaussvsgamma_h1}
+    \end{subfigure}
+    \caption{}
+    \label{fig:clt}
+\end{figure}
+Resulting in more general distribution that can be used for detectors on the same form as $T(\mathbf{x})$, when it is a sum of iid random variables. Using this as the pdf when calculating the $p_{FA}$ and $p_D$ results in \ref{fig:pfavspdaslambda}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/gauss_lambda_pfa_pd.eps}
+    \caption{Showing how $p_{FA}$ and $p_D$ change with $\lambda'$}
+    \label{fig:pfavspdaslambda}
+\end{figure}
 
 
 
 
 \subsection{Task 7: Detector complexity}
+
+\begin{align}
+    P_{D} & = 
+    \int_{\lambda'}^{\infty}\frac{1}{\sqrt{2\pi K(\sigma_w^2+\sigma_s^2)^2}}e^{-\frac{1}{2}(\frac{(x-K(\sigma_w^2+\sigma_s^2))^2}{K(\sigma_w^2+\sigma_s^2)^2}}\nonumber\\
+    & = Q(\frac{\lambda'-K(\sigma_w^2+\sigma_s^2)}{\sqrt{K(\sigma_w^2+\sigma_s^2)^2}})
+    = \beta
+\end{align}
+
+\begin{align}
+    Q^{-1}(\beta) & = \frac{\lambda'-K(\sigma_w^2+\sigma_s^2)}{\sqrt{K(\sigma_w^2+\sigma_s^2)^2}} \\
+\end{align}
+
+
+\begin{align}
+    P_{FA} & = 
+    \int_{\lambda'}^{\infty}\frac{1}{\sqrt{2\pi K\sigma_w^4}}e^{-\frac{1}{2}(\frac{(x-K\sigma_w^2)^2}{K\sigma_w^4}}\nonumber\\
+    & = Q(\frac{\lambda'-K\sigma_w^2}{\sqrt{K\sigma_w^4}})
+    = \alpha
+\end{align}
+
+\begin{align}
+    Q^{-1}(\alpha) & = \frac{\lambda'-K\sigma_w^2}{\sqrt{K\sigma_w^4}}
+    
+\end{align}
 
 \subsection{Task 8: Test with data}
 
