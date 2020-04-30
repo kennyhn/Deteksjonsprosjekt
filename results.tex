@@ -230,33 +230,42 @@ Resulting in more general distribution that can be used for detectors on the sam
 
 
 \subsection{Task 7: Detector complexity}
-
-\begin{align}
-    P_{D} & = 
-    \int_{\lambda'}^{\infty}\frac{1}{\sqrt{2\pi K(\sigma_w^2+\sigma_s^2)^2}}e^{-\frac{1}{2}(\frac{(x-K(\sigma_w^2+\sigma_s^2))^2}{K(\sigma_w^2+\sigma_s^2)^2}}\nonumber\\
-    & = Q(\frac{\lambda'-K(\sigma_w^2+\sigma_s^2)}{\sqrt{K(\sigma_w^2+\sigma_s^2)^2}})
-    = \beta
-\end{align}
-
-\begin{align}
-    Q^{-1}(\beta) & = \frac{\lambda'-K(\sigma_w^2+\sigma_s^2)}{\sqrt{K(\sigma_w^2+\sigma_s^2)^2}} \\
-\end{align}
-
-
+Using the pdf for Gaussian distribution, to find an expression for $K$.
 \begin{align}
     P_{FA} & = 
-    \int_{\lambda'}^{\infty}\frac{1}{\sqrt{2\pi K\sigma_w^4}}e^{-\frac{1}{2}(\frac{(x-K\sigma_w^2)^2}{K\sigma_w^4}}\nonumber\\
-    & = Q(\frac{\lambda'-K\sigma_w^2}{\sqrt{K\sigma_w^4}})
-    = \alpha
+    \int_{\lambda'}^{\infty}\frac{1}{\sqrt{2\pi K\sigma_w^4}}e^{-\frac{1}{2}\frac{\left(x-K\sigma_w^2\right)^2}{K\sigma_w^4}}\nonumber\\
+    & = Q\left(\frac{\lambda'-K\sigma_w^2}{\sqrt{K}\sigma_w^2}\right)
+    = \alpha\label{eq:pfagauss}
 \end{align}
-
+Solve \eqref{eq:pfagauss} for $\lambda'$ to retrieve
 \begin{align}
-    Q^{-1}(\alpha) & = \frac{\lambda'-K\sigma_w^2}{\sqrt{K\sigma_w^4}}
-    
+    \lambda' & = \left(Q^{-1}(\alpha)\sqrt{K}+K\right)\sigma_w^2\label{eq:gausslambdaprime}
+    \end{align}
+Do the same for $P_D$
+\begin{align}
+    P_{D} & = 
+    \int_{\lambda'}^{\infty}\frac{1}{\sqrt{2\pi K(\sigma_w^2+\sigma_s^2)^2}}e^{-\frac{1}{2}\frac{(x-K(\sigma_w^2+\sigma_s^2))^2}{K(\sigma_w^2+\sigma_s^2)^2}}\nonumber\\
+    & = Q\left(\frac{\lambda'-K(\sigma_w^2+\sigma_s^2)}{\sqrt{K(\sigma_w^2+\sigma_s^2)^2}}\right)
+    = \beta\label{eq:pdgauss}
 \end{align}
+Solve \eqref{eq:pdgauss} for $K$, and utilize the result from \eqref{eq:gausslambdaprime} as substitute for $\lambda'$
+\begin{align}
+    Q^{-1}(\beta) & = \frac{\lambda'-K(\sigma_w^2+\sigma_s^2)}{\sqrt{K(\sigma_w^2+\sigma_s^2)^2}}\nonumber\\
+    & = \frac{(Q^{-1}(\alpha)\sqrt{K}+K)\sigma_w^2-K(\sigma_w^2+\sigma_s^2)}{\sqrt{K}(\sigma_w^2+\sigma_s^2)}\nonumber\\
+    & = \frac{Q^{-1}(\alpha)\sqrt{K}\sigma_w^2-K\sigma_s^2}{\sqrt{K}(\sigma_w^2+\sigma_s^2)}\nonumber\\
+    & = \frac{Q^{-1}(\alpha)\sqrt{K}\sigma_w^2}{\sqrt{K}(\sigma_w^2+\sigma_s^2)}-\frac{K\sigma_s^2}{\sqrt{K}(\sigma_w^2+\sigma_s^2)}\nonumber\\
+    \frac{K}{\sqrt{K}}\sigma_s^2 & = Q^{-1}(\alpha)\sigma_w^2-Q^{-1}(\beta)(\sigma_w^2+\sigma_s^2)\nonumber\\
+    K & = \left( \frac{Q^{-1}(\alpha)\sigma_w^2-Q^{-1}(\beta)(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}\right)^2
+\end{align}
+Which gives the amount of samples $K$ needed to attain the limit $P_{FA} = \alpha$ and $P_D = \beta$. Furthermore an observation that can be done is that Q is cumulative function for the standard gaussian distribution where the mean is $0$ and standard deviation is $1$.
+
+
+
+
+
 
 \subsection{Task 8: Test with data}
-
+Using the gaussian detector for all K samples of the data.
 \begin{enumerate}[i]
     \item What is this chapter about
     \item Matlab implementation
