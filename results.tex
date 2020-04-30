@@ -45,7 +45,7 @@ $0.53767-j2.0817\cdot10^{-16}$ & $1.707\cdot10^{-15}$ & $1-j6.5919\cdot10^{-17}$
 \end{tabular}
 \caption{Shows the expected value for each distributions}
 \end{table}
-\newline However looking at the histogram it seems like the expected value is approximately at $0$ anyways for all the four distributions.
+\newline However looking at the histogram it seems like the expected value is approximately at $0$ anyways for all the four distributions. The code for this problem is appended in \ref{sec:prob1}
 
 \subsection{Task 2: One-sample-detector}
 In this task only one sample is used meaning that the detection problem is in this case:
@@ -120,7 +120,7 @@ Furthermore the probability for detection is
     & = -\frac{\sigma_w^2+\sigma_s^2}{\sigma_w^2+\sigma_s^2}e^{-\frac{x[0]}{\sigma_w^2+\sigma_s^2}}\bigg\rvert_{\lambda'}^{\infty}\nonumber\\
     & = e^{-\frac{\lambda'}{\sigma_w^2+\sigma_s^2}}\nonumber
 \end{align}
-Which also only holds for $\lambda'>0$\\
+Which also only holds for $\lambda'>0$. The code for this problem can be found in \ref{sec:prob3}\\
 
 \subsection{Task 4: Generalized for multiple samples}
 We take the one-sample-detector a step further and generalize it to use it for multiple samples. That is that the likelihood function is used to calculate the LRT so that we get
@@ -166,7 +166,7 @@ In figure \ref{fig:roc} the curves become better for increasing doF. This means 
     \caption{The receiver operating characteristics with different doF}
     \label{fig:roc}
 \end{figure}
-
+The code to compute and draw this is in \ref{sec:prob5}
 \subsection{Task 6: Central limit theorem}
 By the central limit theorem that states that for $T(\mathbf{x}) = \sum_{n=0}^{K-1}|x[n]|^2$, that $T(\mathbf{x})$ converges to a Gaussian distribution when $|x[n]|^2$ comes from a independent identical distribution with finite expected value $\mu$ and finite variance $\sigma^2$. Already know that $|x[n]|$ is complex gaussian and iid for each sample $n = 0, \dots, K-1$, so $|x[n]|^2$ is also iid.\\
 \begin{figure}
@@ -196,8 +196,6 @@ and the variance is
     K(\sigma_s^2+\sigma_w^2)^2, & \text{under} H_1
     \end{cases}
 \end{align}
-
-
 Which gives the pdf of a normal Gaussian for each of the cases as
 \begin{equation}
     f(x) = \frac{1}{\sqrt{2\pi\hat{\sigma}^2}}e^{-\frac{1}{2}\left(\frac{x-\hat{\mu}}{\hat{\sigma}}\right)^2}
@@ -225,11 +223,11 @@ Resulting in more general distribution that can be used for detectors on the sam
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/gauss_lambda_pfa_pd.eps}
-    \caption{Showing how $P_{FA}$ and $P_D$ change with $\lambda'$}
+    \caption{Showing how $P_{FA}$ and $P_D$ from normal distribution change with $\lambda'$}
     \label{fig:pfavspdaslambda}
 \end{figure}
 
-One can see that the results are quite similar to the exact $P_{D}$ and $P_{FA}$
+One can see that the results are quite similar to the exact $P_{D}$ and $P_{FA}$.
 
 \begin{figure}
     \centering
@@ -237,7 +235,7 @@ One can see that the results are quite similar to the exact $P_{D}$ and $P_{FA}$
     \caption{Showing how the exact $P_{FA}$ and $P_D$ change with $\lambda'$}
     \label{fig:exactpdpfa}
 \end{figure}
-
+The code for this problem is found in \ref{sec:prob6}
 \newpage
 
 \subsection{Task 7: Detector complexity}
@@ -276,9 +274,32 @@ Which gives the amount of samples $K$ needed to attain the limit $P_{FA} = \alph
 
 
 \subsection{Task 8: Test with data}
+Trying to detect using the numerical data the result in table \ref{tab:detection} is obtained showing how many time steps a PU was detected out of $N=256$ time steps. The code \ref{sec:prob8} was used.
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l||l|l|}
+\hline
+\backslashbox{$\alpha$}{$\beta$} & $0.98$  & $0.99$  \\ \hline\hline
+$0.1$  & 247 &  253 \\ \hline
+$0.01$ & 253 & 251 \\ \hline
+\end{tabular}
+\caption{Showing how many PUs were detected out of 256}
+\label{tab:detection}
+\end{table}
 
-
-Using the Gaussian detector for all K samples of the data.
+Another run gave the result in \ref{tab:detection2}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l||l|l|}
+\hline
+\backslashbox{$\alpha$}{$\beta$} & $0.98$  & $0.99$  \\ \hline\hline
+$0.1$  & 245 & 256 \\ \hline
+$0.01$ & 253 & 248 \\ \hline
+\end{tabular}
+\caption{Showing how many PUs were detected out of 256}
+\label{tab:detection2}
+\end{table}
+Which means it is not always perfect, but by increasing $K$ manually instead of finding the most efficient, it was obtained $100\%$ detection for it all. The reason the results vary are because $K$ signals from each time steps are chosen randomly from the dataset given. However the detector is created using those randomly chosen variables. The probability of false alarm and detection does not mean the results will match perfect, but it comes close to it and it is hard to separate them when the difference between them are so small.
 
 \begin{enumerate}[i]
     \item What is this chapter about
