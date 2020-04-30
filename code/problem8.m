@@ -8,13 +8,13 @@ signal  = load(['Dataset/T8_numerical'...
 sigma_w_sq  = 1;
 sigma_s_sq  = 5;
 
-alpha_0     = 0.1;  % Choose maxlimit p_FA = 0.1
-alpha_1     = 0.01; % Choose maxlimit p_FA = 0.01
+%alpha_0     = 0.1;  % Choose maxlimit p_FA = 0.1
+alpha_0     = 0.01; % Choose maxlimit p_FA = 0.01
 
-beta_0      = 0.99; % choose minlimit p_D = 0.99
-beta_1      = 0.98; % choose minlimit p_D = 0.98
+%beta_0      = 0.98; % choose minlimit p_D = 0.99
+beta_0      = 0.99; % choose minlimit p_D = 0.98
 
-K           = round(((norminv(alpha_1)*sigma_w_sq-...
+K           = round(((norminv(alpha_0)*sigma_w_sq-...
     norminv(beta_0)*(sigma_w_sq+sigma_s_sq))/sigma_s_sq)^2);
 
 signal      = signal(:,randi([1, 100], [K, 1]));
