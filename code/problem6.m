@@ -45,6 +45,23 @@ ylabel('$p(\lambda'')$',...
     'Interpreter', 'latex', 'fontsize', 14);
 hold off
 
+figure(4);
+title('$p_D$ as a function of $p_{FA}$',...
+    'Interpreter', 'latex', 'fontsize', 22);
+hold on
+plot(p_fa, p_d, 'Linewidth', 1);
+hold on
+grid on;
+hold on
+legend('$K = 1024$',...
+    'Interpreter', 'latex', 'fontsize', 18);
+hold on
+xlabel('$\lambda''$',...
+    'Interpreter', 'latex', 'fontsize', 14);
+ylabel('$p(\lambda'')$',...
+    'Interpreter', 'latex', 'fontsize', 14);
+hold off
+
 %% Check out the gaussian distribution up against the gamma distribution
 x       = 700:0.1:1300;
 gaussh0 = normpdf(x, mu_h0, sigma_h0);
