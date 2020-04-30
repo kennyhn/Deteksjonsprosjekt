@@ -1,5 +1,5 @@
 \section{Implementation and results}\label{sec:results}
-\subsection{Task 1: Model development}\todo{Vi må muligens flytte mye av dette over til "tasks" delen. Prøve å bare ha resultater her og ikke utregninger? Enig/ikke enig?}
+\subsection{Task 1: Model development}
 \begin{figure}[ht]
     \begin{subfigure}{.5\textwidth}
         \centering
@@ -29,7 +29,7 @@
         \caption{The histogram of Im(S(k))$~$BPSK}
         \label{fig:im_bpsk}
     \end{subfigure}
-    \caption{The histograms compared to pdf of gaussian}
+    \caption{The histograms compared to pdf of Gaussian}
     \label{fig:gauss}
 \end{figure}
 In the calculations of the variance and expected value for the four distributions the results were:
@@ -45,7 +45,8 @@ $0.53767-j2.0817\cdot10^{-16}$ & $1.707\cdot10^{-15}$ & $1-j6.5919\cdot10^{-17}$
 \end{tabular}
 \caption{Shows the expected value for each distributions}
 \end{table}
-However looking at the histogram it seems like the expected value is approximately at $0$ anyways for all the four distributions.\todo{Kommenter observasjonene, er det kanskje rett at vi kan sette forventningen lik 0?}
+\newline However looking at the histogram it seems like the expected value is approximately at $0$ anyways for all the four distributions.
+
 \subsection{Task 2: One-sample-detector}
 In this task only one sample is used meaning that the detection problem is in this case:
 \begin{align}
@@ -53,7 +54,7 @@ In this task only one sample is used meaning that the detection problem is in th
     H_1 &: x[0] = s[0]+w[0]\nonumber
 \end{align}
 It is given from the problem that $w\thicksim\mathbb{C}\mathcal{N}(0, \sigma_w^2)$ and $s\thicksim\mathbb{C}\mathcal{N}(\mu_s, \sigma_s^2)$ which means that under $H_0$, $x$ is from same distribution as $w$ and thus a complex gaussian with same mean and variance as $w$. Under $H_1$, which is a sum of two complex gaussian distribution, $x$ also is from a complex gaussian distribution. However the mean and variance needs to be calculated to adjust for both distributions.
-The mean of $x[0]$ under $H_1$ is\todo{Usikker på om det er vits med disse utregningene}
+The mean of $x[0]$ under $H_1$ is
 \begin{align}
     \mathbb{E}\{x[0]\} & = \mathbb{E}\{s[0]+w[0]\}\nonumber\\
     & = \mathbb{E}\{s[0]\} + \mathbb{E}\{w[0]\}\nonumber\\
@@ -136,7 +137,7 @@ Here $T(\mathbf{x})$ is a sum of $K$ complex Gaussian squared, meaning the pdf i
 \begin{align}
     P_D & = \int_{\lambda'}^{\infty}\frac{x^{K-1}e^{-\frac{x}{\sigma_w^2+\sigma_s^2}}}{(\sigma_w^2+\sigma_s^2)^K\Gamma(K)}dx\nonumber\\
     & = \frac{1}{(\sigma_w^2+\sigma_s^2)^K\Gamma(K)}\int_{\lambda'}^{\infty}x^{K-1}e^{-\frac{x}{\sigma_w^2+\sigma_s^2}}dx\nonumber\\
-    & = \frac{1}{\sigma_w^2+\sigma_s^2}Q\left(\frac{\lambda'}{\sigma_w^2+\sigma_s^2}\right)
+    & = Q\left(\frac{\lambda'}{\sigma_w^2+\sigma_s^2}\right)
 \end{align}
 Differentiating the integral with respect to $\lambda'$ it shows that $P_D$ is strictly decreasing and has extremal points at $\lambda'=0\vee\lambda'=\infty$. Which essentially means that $P_D$ is maximized when $\lambda'\in[0,\infty)$ is as close to $0$ as possible. For the false alarm with the upper limit $\alpha_0$, its cumulative distribution function is
 \begin{align}
@@ -174,7 +175,7 @@ By the central limit theorem that states that for $T(\mathbf{x}) = \sum_{n=0}^{K
     \caption{The pdf of $\chi^2$ for different degrees of freedom}
     \label{fig:chitogauss}
 \end{figure}
-in figure \ref{fig:chitogauss} notice that for higher degrees of freedom, which essentially means for more samples, the pdf of the $\chi^2$ distributions looks more and more like the Gaussian distribution with mean equal to the degrees of freedom.\\
+In figure \ref{fig:chitogauss} notice that for higher degrees of freedom, which essentially means for more samples, the pdf of the $\chi^2$ distributions looks more and more like the Gaussian distribution with mean equal to the degrees of freedom.\\
 In this case the mean is
 \begin{align}
     \hat{\mu} = \mathbb{E}\left\{T(\mathbf{x})\right\} & = \mathbb{E}\{\sum_{n=0}^{K-1}|x[n]|^2\}\nonumber\\
@@ -194,8 +195,10 @@ and the variance is
     K\sigma_w^4, & \text{under} H_0\\
     K(\sigma_s^2+\sigma_w^2)^2, & \text{under} H_1
     \end{cases}
-\end{align}\todo{Jeg vet ikke hvordan man skal bevise det med triks som i ligning 25, men jeg tror at det er dette svaret vi skal komme frem til (ligning 26) ved å se på variansen til gammafordeling på wikipedia.}
-Which gives the pdf of a normal gaussian for each of the cases as
+\end{align}
+
+
+Which gives the pdf of a normal Gaussian for each of the cases as
 \begin{equation}
     f(x) = \frac{1}{\sqrt{2\pi\hat{\sigma}^2}}e^{-\frac{1}{2}\left(\frac{x-\hat{\mu}}{\hat{\sigma}}\right)^2}
 \end{equation}
@@ -218,16 +221,24 @@ This results in the two figures in for $T(\mathbf{x})$ under $H_0$ and $H_1$ in 
     \caption{}
     \label{fig:clt}
 \end{figure}
-Resulting in more general distribution that can be used for detectors on the same form as $T(\mathbf{x})$, when it is a sum of iid random variables. Using this as the pdf when calculating the $p_{FA}$ and $p_D$ results in \ref{fig:pfavspdaslambda}
+Resulting in more general distribution that can be used for detectors on the same form as $T(\mathbf{x})$, when it is a sum of iid random variables. Using this as the pdf when calculating the $P_{FA}$ and $P_D$ results in \ref{fig:pfavspdaslambda}
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/gauss_lambda_pfa_pd.eps}
-    \caption{Showing how $p_{FA}$ and $p_D$ change with $\lambda'$}
+    \caption{Showing how $P_{FA}$ and $P_D$ change with $\lambda'$}
     \label{fig:pfavspdaslambda}
 \end{figure}
 
+One can see that the results are quite similar to the exact $P_{D}$ and $P_{FA}$
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/p-d-fa-gauss.eps}
+    \caption{Showing how the exact $P_{FA}$ and $P_D$ change with $\lambda'$}
+    \label{fig:exactpdpfa}
+\end{figure}
 
+\newpage
 
 \subsection{Task 7: Detector complexity}
 Using the pdf for Gaussian distribution, to find an expression for $K$.
@@ -257,7 +268,7 @@ Solve \eqref{eq:pdgauss} for $K$, and utilize the result from \eqref{eq:gausslam
     \frac{K}{\sqrt{K}}\sigma_s^2 & = Q^{-1}(\alpha)\sigma_w^2-Q^{-1}(\beta)(\sigma_w^2+\sigma_s^2)\nonumber\\
     K & = \left( \frac{Q^{-1}(\alpha)\sigma_w^2-Q^{-1}(\beta)(\sigma_w^2+\sigma_s^2)}{\sigma_s^2}\right)^2
 \end{align}
-Which gives the amount of samples $K$ needed to attain the limit $P_{FA} = \alpha$ and $P_D = \beta$. Furthermore an observation that can be done is that Q is cumulative function for the standard gaussian distribution where the mean is $0$ and standard deviation is $1$.
+Which gives the amount of samples $K$ needed to attain the limit $P_{FA} = \alpha$ and $P_D = \beta$. Furthermore an observation that can be done is that Q is cumulative function for the standard Gaussian distribution where the mean is $0$ and standard deviation is $1$.
 
 
 
@@ -265,7 +276,10 @@ Which gives the amount of samples $K$ needed to attain the limit $P_{FA} = \alph
 
 
 \subsection{Task 8: Test with data}
-Using the gaussian detector for all K samples of the data.
+
+
+Using the Gaussian detector for all K samples of the data.
+
 \begin{enumerate}[i]
     \item What is this chapter about
     \item Matlab implementation
