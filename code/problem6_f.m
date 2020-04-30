@@ -25,8 +25,7 @@ function problem6_f
     sigma_h1        = sqrt(K)*(sigma_w_sq_hat+sigma_s_sq_hat);
     p_d             = 1 - normcdf(lambda_prime,...
         mu_h1, sigma_h1);
-
-
+    
     figure(1);
     title('$p_{FA}$ and $p_D$ as function of $\lambda''$',...
         'Interpreter', 'latex', 'fontsize', 22);
@@ -54,7 +53,7 @@ function problem6_f
     hold on
     grid on;
     hold on
-    legend('$K = 1024$',...
+    legend(['$K = $' num2str(K)],...
         'Interpreter', 'latex', 'fontsize', 18);
     hold on
     xlabel('$\lambda''$',...

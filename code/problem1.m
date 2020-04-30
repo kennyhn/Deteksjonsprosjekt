@@ -59,7 +59,7 @@ disp(['The expected value of product'...
     num2str(product_s_expected_bpsk)]);
 
 %% Gaussian Create a generic complex point distribution
-sigma_s_sq      = 980; %10^(-5);
+sigma_s_sq      = 980;
 
 px_r            = makedist('Normal', 'mu',...
     0, 'sigma', sqrt(sigma_s_sq/2));
@@ -104,7 +104,7 @@ hold off;
 
 %% BPSK Create a generic complex point distribution
 
-sigma_s_sq      = 800; %5*10^(-4);
+sigma_s_sq      = 800;
 
 px_r            = makedist('Normal', 'mu', 0,...
     'sigma', sqrt(sigma_s_sq/2));
