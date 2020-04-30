@@ -1,14 +1,5 @@
 \section{Conclusion}\label{sec:conclusion}
+This project focused on Spectrum Sensing in OFDM Cognitive Radios, which is an important problem in modern communication as the spectrum is a scarce resource. After modeling how the signal data was generated, a suitable detector for the binary hypothesis testing was implemented. This was a result of using well known statistical features of the Gamma and Gaussian distribution, as well as the Neyman-Person Lemma. After testing the performance of the one-sample-detector, a more generalized K-sample detector was implemented. This new NP detector for K samples was then approximated as a Gaussian random variable which showed to be quite accurate to the original gamma distribution. This detector based on K samples showed to be useful in the way that one could choose a $P_{D}$ and $P_{FA}$ only at the cost of more samples K. In the end, this whole detector was put to a test when a data set of 100 realizations of a signal from a PU was tested on the detector. As the result in task 8 have shown, the detector did very well, and detected the signal almost every time, however increasing K manually gave a detection rate of $100\%$.\\
+The project has been very educational and it has been specifically interesting to see how probability distributions are used in modern communications systems for hypothesis testing. With an increasing number of communication devices this problem is highly relevant.
 
-In this 
 
-\begin{enumerate}[i]
-    \item An extended version of summary
-    \begin{itemize}
-        \item theory, programming, implementation, and so on.
-    \end{itemize}
-    \item Both positive and negative results should be mentioned
-    \item Include main points from discussion of results
-    \item Any positive/negative comments on the task intention and quality...
-    \item What you learnt from the project
-\end{enumerate}
